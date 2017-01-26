@@ -41,8 +41,8 @@
 #endif
 
 
-#define outout_channel_of_red    0
-#define outout_channel_of_green  1
+#define outout_channel_of_red    1
+#define outout_channel_of_green  0
 #define outout_channel_of_blue   2
 
 #define PWM_OUTPUT_CH0           3
