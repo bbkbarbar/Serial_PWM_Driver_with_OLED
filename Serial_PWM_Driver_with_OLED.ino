@@ -17,7 +17,7 @@
  *     For this feature define macro: USE_OLED_DISPLAY
  * 
  * 
- * Furter options (not implemented yet):
+ * Further options (not implemented yet):
  * Handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
  * Plan: for further channels use a second serial line
  * for send command for an other instance of Serial PWM driver
@@ -35,9 +35,7 @@
   #include "SSD1306Ascii.h"
   #include "SSD1306AsciiAvrI2c.h"
 
-  // 0X3C+SA0 - 0x3C or 0x3D
-  #define I2C_ADDRESS 0x3C
-
+  #define I2C_ADDRESS         0x3C  // 0X3C+SA0 - 0x3C or 0x3D
   SSD1306AsciiAvrI2c oled;
   
 #endif
@@ -47,17 +45,20 @@
 #define outout_channel_of_green  1
 #define outout_channel_of_blue   2
 
-#define DEFAULT_OUTPUT_VALUE     0
-#define PWM_CHANNEL_COUNT        6
-#define PWM_MAX                255
-#define DISPLAY_STEP            25
-
 #define PWM_OUTPUT_CH0           3
 #define PWM_OUTPUT_CH1           5
 #define PWM_OUTPUT_CH2           6
 #define PWM_OUTPUT_CH3           9
 #define PWM_OUTPUT_CH4          10
 #define PWM_OUTPUT_CH5          11
+
+
+#define DEFAULT_OUTPUT_VALUE     0
+
+#define PWM_CHANNEL_COUNT        6
+#define CHANNEL_UNDEFINED       -1
+#define PWM_MAX                255
+#define DISPLAY_STEP            25
 
 const char pwmChannelMap[PWM_CHANNEL_COUNT] = {
   PWM_OUTPUT_CH0,
@@ -99,28 +100,16 @@ void setup() {
   }
 
   #ifdef USE_OLED_DISPLAY
-    oled.println("Listen serial port..");
-    oled.println("123456789012345678901234567890");
+    // Show start message on display
+    oled.set2X();
+    oled.println("Serial\nPWM Driver\nv1.0");
+    oled.set1X();
+    oled.println("\nListen serial port..");
   #endif
-  //123456789012345678901
-  //ch0: 255 ##########
 }
 
 //------------------------------------------------------------------------------
 
-
-
-/*
-#define LINE_NUM 6
-String displayContent[LINE_NUM] = {"","","","","",""};
-char currentLine = 0;
-
-void showDisplayContent(){
-  oled.clear();
-  for(char i=0; i<LINE_NUM; i++){
-    oled.println(displayContent[i]);  
-  }
-}/**/
 
 #ifdef USE_OLED_DISPLAY
 void showOutputs(){
@@ -142,25 +131,28 @@ void showOutputs(){
 void processLine(String line){
 
   int channel = ((String)(line.charAt(0))).toInt();
-  if((channel < 0) || (channel > 5)){
-    channel = -1;
+  if((channel < 0) || (channel >= PWM_CHANNEL_COUNT)){
+    channel = CHANNEL_UNDEFINED;
   }
 
-  int value = ((String)(line.substring(2))).toInt();
-  if(value > PWM_MAX) {
-    value = PWM_MAX;
+  if(channel > CHANNEL_UNDEFINED){
+    int value = ((String)(line.substring(2))).toInt();
+    if(value > PWM_MAX) {
+      value = PWM_MAX;
+    }
+  
+    if(channel < PWM_CHANNEL_COUNT){
+      outputs[channel] = value;
+      // Set pwm output of according to processed channel number and value..
+      analogWrite(pwmChannelMap[channel], value);
+    }
   }
-
-  if((channel >= 0) && (channel <PWM_CHANNEL_COUNT)){
-    outputs[channel] = value;
-  }
-
-  analogWrite(pwmChannelMap[channel], value);
 
   #ifdef USE_OLED_DISPLAY
     showOutputs();
   #endif
 }
+
 
 void loop(){
 
@@ -169,7 +161,7 @@ void loop(){
     if (Serial.available() >0) {
       char c = Serial.read();  //gets one byte from serial buffer
       if(c != '\n'){
-        inputBuffer += c; //makes the string inputBuffer
+        inputBuffer += c; //build an inputBuffer string from received charachters
       }else{
         processLine(inputBuffer);
         inputBuffer = "";

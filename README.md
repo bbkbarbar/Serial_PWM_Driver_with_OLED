@@ -18,10 +18,14 @@ Where:
     For this feature define macro: USE_OLED_DISPLAY
 
 
-### Furter options (not implemented yet):
+### Further options (not implemented yet):
 Handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
 Plan: for further channels use a second serial line
 for send command for an other instance of Serial PWM driver
+
+
+### Used library (needed only for using OLED display):
+[Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
 
 
 #### Created by: 
