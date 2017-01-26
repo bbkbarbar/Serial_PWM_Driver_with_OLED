@@ -7,10 +7,10 @@
 Arduino Nano
 
 Required input line over serial communication:
-"<channel_num> <value>"
-Where:
-    <channel_num> is an integer in range [0..5]
-    <value> is an integer for pwm value
+
+| Input line        | channel_num   | value  |
+| ----------------- | ------------- | ------ |
+| channel_num value | integer 0..5  | 0..255 |
 
 
 ### Optional feautre:
