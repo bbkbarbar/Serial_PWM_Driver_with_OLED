@@ -16,6 +16,7 @@ Where:
 ### Optional feautre:
     Can handle simple I2C oled display for show current values.
     For this feature define macro: USE_OLED_DISPLAY
+    ![Testing @ v1.0](/Documents/Testing_v1_0.png)
 
 
 ### Further options (not implemented yet):
