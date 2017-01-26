@@ -17,7 +17,7 @@ Required input line over serial communication:
     Can handle simple I2C oled display for show current values.
     For this feature define macro: USE_OLED_DISPLAY
     Used library for handling OLED display:
-    [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
+[Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
 
     Testing v1.0 with display: 
 ![Testing @ v1.0](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Documents/Testing_v1_0.png "Testing @ v1.0")
