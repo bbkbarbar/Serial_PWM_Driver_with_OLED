@@ -16,7 +16,8 @@ Where:
 ### Optional feautre:
     Can handle simple I2C oled display for show current values.
     For this feature define macro: USE_OLED_DISPLAY
-    ![Testing @ v1.0](/Documents/Testing_v1_0.png)
+    Inline-style: 
+![Testing @ v1.0](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Documents/Testing_v1_0.png "Testing @ v1.0")
 
 
 ### Further options (not implemented yet):
