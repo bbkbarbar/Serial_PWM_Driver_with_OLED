@@ -1,9 +1,9 @@
 # Serial PWM Driver with optional OLED display
 
-### Number of output channels: 
+### Number of output channels:
 6 (8bit pwm outputs)
 
-### Device: 
+### Device:
 Arduino Nano
 
 Required input line over serial communication:
@@ -19,7 +19,7 @@ Required input line over serial communication:
     Used library for handling OLED display:
 [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
 
-    Testing v1.0 with display: 
+    Testing v1.0 with display:
 ![Testing @ v1.0](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Documents/Testing_v1_0.png "Testing @ v1.0")
 
 
@@ -29,6 +29,6 @@ Plan: for further channels use a second serial line
 for send command for an other instance of Serial PWM driver
 
 
-#### Created by: 
+#### Created by:
 Andras Boor
 2017.01.
