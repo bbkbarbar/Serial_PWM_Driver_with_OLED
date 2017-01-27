@@ -17,8 +17,10 @@
  * Optional feautre:
  *     Can handle simple oled display for show current values over I2C or SoftSPI
  *     For this feature define one of following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
- *     Note: In case of using SPI display, need to define the following macros:
+ *     Note: In case of using SPI display, need to define proper values for the following macros:
  *           OLED_DC, OLED_CS, OLED_D0, OLED_D1, OLED_RST
+ *           In case of using I2C display, need to define proper value 
+ *           for "I2C_ADDRESS_OF_DISPLAY" macro.
  * 
  * 
  * Further options (not implemented yet):
