@@ -1,9 +1,11 @@
 /*
  * Serial PWM driver
- * # of output channels: 6 (8bit pwm outputs)
+ * version 1.1
  * 
  * Device: 
  *     Arduino Nano
+ * Number of output channels: 
+ *     6 (8bit pwm outputs)
  *
  * Required input line over serial communication:
  * "<channel_num> <value>"
@@ -13,32 +15,56 @@
  *
  *
  * Optional feautre:
- *     Can handle simple I2C oled display for show current values.
- *     For this feature define macro: USE_OLED_DISPLAY
+ *     Can handle simple oled display for show current values over I2C or SoftSPI
+ *     For this feature define one of following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
+ *     Note: In case of using SPI display, need to define the following macros:
+ *           OLED_DC, OLED_CS, OLED_D0, OLED_D1, OLED_RST
  * 
  * 
  * Further options (not implemented yet):
  * Handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
- * Plan: for further channels use a second serial line
+ * Plan: for further channels use a second SoftwareSerial bus
  * for send command for an other instance of Serial PWM driver
  * 
  * 
  * Created by: Andras Boor
  * 2017.01.
  */
+#define VERSION  "v1.1"
 
 
-#define USE_OLED_DISPLAY
+#define USE_OLED_DISPLAY_I2C
 
-#ifdef USE_OLED_DISPLAY
 
+#if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
   #include "SSD1306Ascii.h"
-  #include "SSD1306AsciiAvrI2c.h"
-
-  #define I2C_ADDRESS         0x3C  // 0X3C+SA0 - 0x3C or 0x3D
-  SSD1306AsciiAvrI2c oled;
-  
 #endif
+
+
+
+#ifdef USE_OLED_DISPLAY_I2C
+  #include "SSD1306AsciiAvrI2c.h"
+  
+  #define I2C_ADDRESS_OF_DISPLAY  0x3C  // 0X3C+SA0 - 0x3C or 0x3D
+  
+  SSD1306AsciiAvrI2c oled;
+#endif
+
+
+
+#ifdef USE_OLED_DISPLAY_SPI
+  #include "SSD1306AsciiSoftSpi.h"
+
+  // pin definitions for using SPI oled display with softSpi
+  #define OLED_DC               14
+  #define OLED_CS               15
+  #define OLED_D0               16
+  #define OLED_D1               17
+  #define OLED_RST              18  
+
+  SSD1306AsciiSoftSpi oled;
+#endif
+
 
 
 #define outout_channel_of_red    1
@@ -53,11 +79,11 @@
 #define PWM_OUTPUT_CH5          11
 
 
-#define DEFAULT_OUTPUT_VALUE     0
+#define DEFAULT_OUTPUT_VALUE     0    // can set any value in range [0..255] depending on planned useage
 
-#define PWM_CHANNEL_COUNT        6
+#define PWM_CHANNEL_COUNT        6    // based on the physical limitations of Arduino Nano
 #define CHANNEL_UNDEFINED       -1
-#define PWM_MAX                255
+#define PWM_MAX                255    // max value of 8bit pwm signal
 #define DISPLAY_STEP            25
 
 const char pwmChannelMap[PWM_CHANNEL_COUNT] = {
@@ -70,7 +96,7 @@ const char pwmChannelMap[PWM_CHANNEL_COUNT] = {
 };
 
 
-String inputBuffer = "";                       // Variable for storing received data
+String inputBuffer = "";                      // Variable for storing received data
 unsigned char outputs[PWM_CHANNEL_COUNT];     // Array for storing values of pwm channels
 
 
@@ -86,8 +112,13 @@ void setup() {
   pinMode(PWM_OUTPUT_CH4, OUTPUT);   
   pinMode(PWM_OUTPUT_CH5, OUTPUT);   
   
-  #ifdef USE_OLED_DISPLAY
-    oled.begin(&Adafruit128x64, I2C_ADDRESS, true);
+  #ifdef USE_OLED_DISPLAY_I2C
+    oled.begin(&Adafruit128x64, I2C_ADDRESS_OF_DISPLAY, true);
+  #endif
+  #ifdef USE_OLED_DISPLAY_SPI
+    oled.begin(&Adafruit128x64, OLED_CS, OLED_DC, OLED_D0, OLED_D1, OLED_RST);
+  #endif
+  #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
     oled.setFont(Adafruit5x7);  
     oled.clear();  
   #endif
@@ -99,10 +130,10 @@ void setup() {
     outputs[i] = DEFAULT_OUTPUT_VALUE;
   }
 
-  #ifdef USE_OLED_DISPLAY
+  #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
     // Show start message on display
     oled.set2X();
-    oled.println("Serial\nPWM Driver\nv1.0");
+    oled.println("Serial\nPWM Driver\n" + String(VERSION));
     oled.set1X();
     oled.println("\nListen serial port..");
   #endif
@@ -111,7 +142,7 @@ void setup() {
 //------------------------------------------------------------------------------
 
 
-#ifdef USE_OLED_DISPLAY
+#if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
 void showOutputs(){
   oled.clear();
   for(int ch=0; ch<PWM_CHANNEL_COUNT; ch++){
@@ -148,7 +179,7 @@ void processLine(String line){
     }
   }
 
-  #ifdef USE_OLED_DISPLAY
+  #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
     showOutputs();
   #endif
 }
