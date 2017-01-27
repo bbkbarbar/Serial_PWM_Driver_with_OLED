@@ -37,6 +37,8 @@
 
 #define USE_OLED_DISPLAY_I2C
 
+#define MAX_INPUT_VALUE           255
+
 
 #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
   #include "SSD1306Ascii.h"
@@ -161,6 +163,14 @@ void showOutputs(){
 }
 #endif
 
+
+int calculateOutputValue(int inputValue){
+  // TODO: implement this function to calculate 8bit output value if input value has a different range 
+  //       (e.g.: 12bit input value with range: [0..4095])
+  return inputValue;
+}
+
+
 void processLine(String line){
 
   int channel = ((String)(line.charAt(0))).toInt();
@@ -169,7 +179,7 @@ void processLine(String line){
   }
 
   if(channel > CHANNEL_UNDEFINED){
-    int value = ((String)(line.substring(2))).toInt();
+    int value = calculateOutputValue(((String)(line.substring(2))).toInt());
     if(value > PWM_MAX) {
       value = PWM_MAX;
     }
