@@ -1,0 +1,5 @@
+# Arduino IDE temporary files
+*.ino*.tmp
+
+# Compiled python files
+*.pyc
