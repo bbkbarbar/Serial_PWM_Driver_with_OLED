@@ -26,8 +26,8 @@ Arduino Nano
 
 
 ### Further options (not implemented yet):
-Handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
-Plan: for further channels use a second serial line
+Handle more than 6 channels (what is the physical limitation by number of arduino's pwm channels)
+Plan: for further channels use a second serial bus (softSerial)
 for send command for an other instance of Serial PWM driver
 
 
