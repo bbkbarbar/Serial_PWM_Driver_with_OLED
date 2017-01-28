@@ -12,6 +12,10 @@
  * Where:
  *     <channel_num> is an integer in range [0..5]
  *     <value> is an integer for pwm value
+ *     
+ * Input value can be a 8bit pwm value or 12bit pwmvalue.
+ * Note: For handle 12bit pwm inputs define the following macro:
+ *       USE_12BIT_INPUT_VALUES
  *
  *
  * Optional feautre:
@@ -32,12 +36,12 @@
  * Created by: Andras Boor
  * 2017.01.
  */
-#define VERSION  "v1.1"
+#define VERSION  "v1.2"
 
 
 #define USE_OLED_DISPLAY_I2C
 
-#define MAX_INPUT_VALUE           255
+#define USE_12BIT_INPUT_VALUES
 
 
 #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
@@ -89,6 +93,8 @@
 #define CHANNEL_UNDEFINED       -1
 #define PWM_MAX                255    // max value of 8bit pwm signal
 #define DISPLAY_STEP            25
+#define QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION         16
+#define HALF_OF_QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION  8
 
 const char pwmChannelMap[PWM_CHANNEL_COUNT] = {
   PWM_OUTPUT_CH0,
@@ -164,10 +170,17 @@ void showOutputs(){
 #endif
 
 
-int calculateOutputValue(int inputValue){
+int calculateOutputValue(int input){
   // TODO: implement this function to calculate 8bit output value if input value has a different range 
   //       (e.g.: 12bit input value with range: [0..4095])
-  return inputValue;
+  int output;
+  #ifdef USE_12BIT_INPUT_VALUES
+    output = ((input + HALF_OF_QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION) / QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION);
+  #else
+    output = input;
+  #endif
+  
+  return output;
 }
 
 
@@ -201,7 +214,7 @@ void loop(){
 
   while (Serial.available()) {
     delay(3);  //delay to allow buffer to fill 
-    if (Serial.available() >0) {
+    if (Serial.available() > 0) {
       char c = Serial.read();  //gets one byte from serial buffer
       if(c != '\n'){
         inputBuffer += c; //build an inputBuffer string from received charachters
