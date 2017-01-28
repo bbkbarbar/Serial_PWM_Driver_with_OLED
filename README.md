@@ -13,10 +13,10 @@ Arduino Nano
 
 ### Required input line over serial communication:
 
-| Input mode | Input line        | channel_num   | value   |
-| ---------- | ----------------- | ------------- | ------- |
-| 8 bit      | channel_num value | integer 0..5  | 0..255  |
-| 12 bit     | channel_num value | integer 0..5  | 0..4095 |
+| Input mode | Input line        | channel_num  | value   |
+| :--------: | :---------------: | :----------: | :-----: |
+| 8 bit      | channel_num value | integer 0..5 | 0..255  |
+| 12 bit     | channel_num value | integer 0..5 | 0..4095 |
 
 
 ### Optional feautre:
