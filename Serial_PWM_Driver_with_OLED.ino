@@ -1,6 +1,6 @@
 /*
  * Serial PWM driver
- * version 1.1
+ * version 1.2
  * 
  * Device: 
  *     Arduino Nano
@@ -145,7 +145,14 @@ void setup() {
     oled.set2X();
     oled.println("Serial\nPWM Driver\n" + String(VERSION));
     oled.set1X();
-    oled.println("\nListen serial port..");
+
+    #ifdef USE_12BIT_INPUT_VALUES
+      oled.println("\nInput mode: 12bit");
+    #else
+      oled.println("\nInput mode: 8bit");
+    #endif
+
+    //oled.println("Listen serial port..");
   #endif
 }
 
@@ -171,15 +178,12 @@ void showOutputs(){
 
 
 int calculateOutputValue(int input){
-  // TODO: implement this function to calculate 8bit output value if input value has a different range 
-  //       (e.g.: 12bit input value with range: [0..4095])
   int output;
   #ifdef USE_12BIT_INPUT_VALUES
     output = ((input + HALF_OF_QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION) / QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION);
   #else
     output = input;
   #endif
-  
   return output;
 }
 
