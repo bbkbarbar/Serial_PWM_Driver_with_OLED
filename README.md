@@ -22,7 +22,7 @@ Arduino Nano
     Can handle simple oled display over I2C or SoftSPI protocols for show current values.
     For this feature define one of following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
     Used library for handling OLED display:
-[Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
+    [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
 
     Testing v1.0 with display:
 ![Testing @ v1.0](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Documents/Testing_v1_0.png "Testing @ v1.0")
