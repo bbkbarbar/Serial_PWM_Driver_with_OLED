@@ -3,3 +3,7 @@
 
 # Compiled python files
 *.pyc
+
+# Eagle temporary files
+*.s#*
+*.b#*
