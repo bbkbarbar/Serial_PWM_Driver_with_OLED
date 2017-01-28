@@ -1,9 +1,12 @@
 # Serial PWM Driver with optional OLED display
 
-##### Version: 1.1
+##### Version: 1.2
 
 ### Number of output channels:
 6 (8bit pwm outputs)
+
+    Note: Can handle 12bit inputs too.
+    For this function define macro: USE_12BIT_INPUT_VALUES
 
 ### Device:
 Arduino Nano
