@@ -4,6 +4,9 @@
 # Compiled python files
 *.pyc
 
-# Eagle temporary files
+# Eagle files (since eagle designs stored as .zip)
+*.epf
+*.sch
+*.brd
 *.s#*
 *.b#*
