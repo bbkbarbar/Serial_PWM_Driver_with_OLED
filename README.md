@@ -38,7 +38,7 @@ for send command for an other instance of Serial PWM driver
 
 
 ### Eagle schamatic available as zip:
-[Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_Eagle_desing.zip)
+[Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
 
 
 #### Created by:
