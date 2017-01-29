@@ -1,6 +1,6 @@
 /*
  * Serial PWM driver
- * version 1.2
+ * version 1.21
  * 
  * Device: 
  *     Arduino Nano
@@ -36,7 +36,7 @@
  * Created by: Andras Boor
  * 2017.01.
  */
-#define VERSION  "v1.2"
+#define VERSION  "v1.21"
 
 
 #define USE_OLED_DISPLAY_I2C
@@ -147,9 +147,9 @@ void setup() {
     oled.set1X();
 
     #ifdef USE_12BIT_INPUT_VALUES
-      oled.println("\nInput mode: 12bit");
+      oled.println("\nInput mode: 12 bit");
     #else
-      oled.println("\nInput mode: 8bit");
+      oled.println("\nInput mode: 8 bit");
     #endif
 
     //oled.println("Listen serial port..");
@@ -190,7 +190,8 @@ int calculateOutputValue(int input){
 
 void processLine(String line){
 
-  int channel = ((String)(line.charAt(0))).toInt();
+  //int channel = ((String)(line.charAt(0))).toInt();
+  int channel = ((String)(line.substring(0,line.indexOf(' ')))).toInt();
   if((channel < 0) || (channel >= PWM_CHANNEL_COUNT)){
     channel = CHANNEL_UNDEFINED;
   }
