@@ -1,0 +1,50 @@
+Partlist
+
+Exported from PCB_schematic_v1.0.brd at 2017.01.29. 13:27
+
+EAGLE Version 8.0.0 Copyright (c) 1988-2017 Autodesk, Inc.
+
+Part              Value            Package    Library          
+  
+CH0-2             Terminal-4       W237-4     con-wago-500     
+CH3-5             Terminal-4       W237-4     con-wago-500     
+I2C               Pin header 1x4   MA04-1     con-lstb         
+OK1               PC817            DIL04      optocoupler      
+OK2               PC817            DIL04      optocoupler      
+OK3               PC817            DIL04      optocoupler      
+OK4               PC817            DIL04      optocoupler      
+OK5               PC817            DIL04      optocoupler      
+OK6               PC817            DIL04      optocoupler      
+OUT_1             Pin header 1x4   MA04-1     con-lstb         
+OUT_2             Pin header 1x4   MA04-1     con-lstb         
+POWER_IN          Terminal-2       W237-132   con-wago-508     
+Q1                IRLZ44N          TO220BV    transistor-power 
+Q2                IRLZ44N          TO220BV    transistor-power 
+Q3                IRLZ44N          TO220BV    transistor-power 
+Q4                IRLZ44N          TO220BV    transistor-power 
+Q5                IRLZ44N          TO220BV    transistor-power 
+Q6                IRLZ44N          TO220BV    transistor-power 
+R1                330              0207/10    rcl              
+R2                330              0207/10    rcl              
+R3                2k2              0207/10    rcl              
+R4                1k               0207/10    rcl              
+R5                2k2              0207/10    rcl              
+R6                1k               0207/10    rcl              
+R7                330              0207/10    rcl              
+R8                2k2              0207/10    rcl              
+R9                1k               0207/10    rcl              
+R10               330              0207/10    rcl              
+R11               2k2              0207/10    rcl              
+R12               1k               0207/10    rcl              
+R13               330              0207/10    rcl              
+R14               2k2              0207/10    rcl              
+R15               1k               0207/10    rcl              
+R16               330              0207/10    rcl              
+R17               2k2              0207/10    rcl              
+R18               1k               0207/10    rcl              
+R19               220              0207/10    rcl              
+R20               470              0207/10    rcl              
+RAW               Terminal-2       W237-102   con-wago-500     
+SERIAL            Pin header 1x4   MA04-1     con-lstb         
+SERIAL_VCC_JUMPER Pin header 1x3   MA03-1     con-lstb         
+U$1               Arduino          Nano       Arduino-clone    
