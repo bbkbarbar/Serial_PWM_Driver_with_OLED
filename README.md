@@ -29,7 +29,7 @@ Arduino Nano
 
     Testing v1.0 with display:
 ![Testing @ v1.0](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Documents/Testing_v1_0.png "Testing @ v1.0")
-
+![Testing @ v1.2](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Breadboard_Testing_v1.2.PNG "Testing @ v1.2")
 
 ### Further options (not implemented yet):
 Handle more than 6 channels (what is the physical limitation by number of arduino's pwm channels)
