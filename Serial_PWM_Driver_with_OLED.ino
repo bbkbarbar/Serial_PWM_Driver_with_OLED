@@ -1,6 +1,6 @@
 /*
  * Serial PWM driver
- * version 1.21
+ * version 1.23
  * 
  * Device: 
  *     Arduino Nano
@@ -18,16 +18,17 @@
  *       USE_12BIT_INPUT_VALUES
  *
  *
- * Optional feautre:
+ * Optional feature:
  *     Can handle simple oled display for show current values over I2C or SoftSPI
- *     For this feature define one of following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
+ *     For this feature define one of following macros: 
+ *           USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
  *     Note: In case of using SPI display, need to define proper values for the following macros:
  *           OLED_DC, OLED_CS, OLED_D0, OLED_D1, OLED_RST
  *           In case of using I2C display, need to define proper value 
  *           for "I2C_ADDRESS_OF_DISPLAY" macro.
  * 
  * 
- * Further options (not implemented yet):
+ * Further option: (just implemented, NOT TESTED yet!)
  * Handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
  * Plan: for further channels use a second SoftwareSerial bus
  * for send command for an other instance of Serial PWM driver
@@ -36,7 +37,7 @@
  * Created by: Andras Boor
  * 2017.01.
  */
-#define VERSION  "v1.21"
+#define VERSION  "v1.23"
 
 
 /*
@@ -46,15 +47,48 @@
 
 #define USE_12BIT_INPUT_VALUES
 
+#define HANDLE_FURTHER_CHANNELS
 
 
+//===============================================================================================
+
+
+/*
+ *  Oprional feature: Handle further channels (pass command for an other instance)
+ */
+#ifdef HANDLE_FURTHER_CHANNELS
+
+  #include <SoftwareSerial.h>
+
+  // Define witch pins will be used for softSerial output bus for pass commands of further channels (channelId >= 6)
+  #define SOFTSERIAL_TX              2
+  #define SOFTSERIAL_RX              4
+  
+  SoftwareSerial serialOutput(SOFTSERIAL_RX, SOFTSERIAL_TX); // RX, TX
+
+  /*
+   *  Serial input bus for receive commands
+   */
+  #define SERIAL_OUTPUT_BAUNDRATE 9600
+
+#endif
+
+
+
+/*
+ *  Serial input bus for receive commands
+ */
 #define SERIAL_INPUT_BAUNDRATE    9600
 
+
+
+/*
+ *  Oprional feature: Handle OLED display over I2C or SoftSPI protocols
+ */
 
 #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
   #include "SSD1306Ascii.h"
 #endif
-
 
 
 #ifdef USE_OLED_DISPLAY_I2C
@@ -64,7 +98,6 @@
   
   SSD1306AsciiAvrI2c oled;
 #endif
-
 
 
 #ifdef USE_OLED_DISPLAY_SPI
@@ -81,6 +114,9 @@
 #endif
 
 
+/*
+ *  Definitions for basic functionality
+ */
 
 #define outout_channel_of_red        1
 #define outout_channel_of_green      0
@@ -117,7 +153,7 @@ unsigned char outputs[PWM_CHANNEL_COUNT];     // Array for storing values of pwm
 String inputBuffer = "";                      // Variable for storing received data
 
 
-//------------------------------------------------------------------------------
+//=================================================================================
 
 void setup() {
 
@@ -129,6 +165,7 @@ void setup() {
   pinMode(PWM_OUTPUT_CH4, OUTPUT);   
   pinMode(PWM_OUTPUT_CH5, OUTPUT);   
   
+
   #ifdef USE_OLED_DISPLAY_I2C
     oled.begin(&Adafruit128x64, I2C_ADDRESS_OF_DISPLAY, true);
   #endif
@@ -140,12 +177,19 @@ void setup() {
     oled.clear();  
   #endif
 
+
   Serial.begin(SERIAL_INPUT_BAUNDRATE);   //Sets the baud for serial data transmission      
   delay(300);
+  #ifdef HANDLE_FURTHER_CHANNELS  
+    serialOutput.begin(SERIAL_OUTPUT_BAUNDRATE);
+    delay(100);
+  #endif
+
 
   for(char i=0; i<PWM_CHANNEL_COUNT; i++){
     outputs[i] = DEFAULT_OUTPUT_VALUE;
   }
+
 
   #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
     // Show start message on display
@@ -158,12 +202,13 @@ void setup() {
     #else
       oled.println("\nInput mode: 8 bit");
     #endif
+      //TODO: show on welcome screen if HANDLE_FURTHER_CHANNELS is "turned on"
     //oled.println("Listen serial port..");
   #endif
 
 }
 
-//------------------------------------------------------------------------------
+//=================================================================================
 
 
 #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
@@ -195,6 +240,13 @@ int calculateOutputValue(int input){
 }
 
 
+#ifdef HANDLE_FURTHER_CHANNELS
+String buildCommandOutput(unsigned short channel, unsigned short value){
+  return (String(shiftedChannelId) + " " + String(value));
+}
+#endif
+
+
 void processLine(String line){
 
   //int channel = ((String)(line.charAt(0))).toInt();
@@ -211,9 +263,18 @@ void processLine(String line){
   
     if(channel < PWM_CHANNEL_COUNT){
       outputs[channel] = value;
-      // Set pwm output of according to processed channel number and value..
+      // Set own pwm output of according to processed channel number and value..
       analogWrite(pwmChannelMap[channel], value);
     }
+    #ifdef HANDLE_FURTHER_CHANNELS
+      //TODO: try it out
+      else{ 
+        // Pass commands of futher channels for the other device over softSerial bus
+        unsigned short shiftedChannelId = channel - PWM_CHANNEL_COUNT;
+        serialOutput.write( buildCommandOutput(shiftedChannelId, value) + "\n" );
+      }
+    #endif
+
   }
 
   #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
