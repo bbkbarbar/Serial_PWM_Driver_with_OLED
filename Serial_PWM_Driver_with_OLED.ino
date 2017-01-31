@@ -39,9 +39,16 @@
 #define VERSION  "v1.21"
 
 
+/*
+ *  Macro definitions for optional features
+ */
 #define USE_OLED_DISPLAY_I2C
 
 #define USE_12BIT_INPUT_VALUES
+
+
+
+#define SERIAL_INPUT_BAUNDRATE    9600
 
 
 #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
@@ -63,36 +70,36 @@
 #ifdef USE_OLED_DISPLAY_SPI
   #include "SSD1306AsciiSoftSpi.h"
 
-  // pin definitions for using SPI oled display with softSpi
-  #define OLED_DC               14
-  #define OLED_CS               15
-  #define OLED_D0               16
-  #define OLED_D1               17
-  #define OLED_RST              18  
+  // pin definitions for using SPI oled display over softSpi
+  #define OLED_DC                   14
+  #define OLED_CS                   15
+  #define OLED_D0                   16
+  #define OLED_D1                   17
+  #define OLED_RST                  18  
 
   SSD1306AsciiSoftSpi oled;
 #endif
 
 
 
-#define outout_channel_of_red    1
-#define outout_channel_of_green  0
-#define outout_channel_of_blue   2
+#define outout_channel_of_red        1
+#define outout_channel_of_green      0
+#define outout_channel_of_blue       2
 
-#define PWM_OUTPUT_CH0           3
-#define PWM_OUTPUT_CH1           5
-#define PWM_OUTPUT_CH2           6
-#define PWM_OUTPUT_CH3           9
-#define PWM_OUTPUT_CH4          10
-#define PWM_OUTPUT_CH5          11
+#define PWM_OUTPUT_CH0               3
+#define PWM_OUTPUT_CH1               5
+#define PWM_OUTPUT_CH2               6
+#define PWM_OUTPUT_CH3               9
+#define PWM_OUTPUT_CH4              10
+#define PWM_OUTPUT_CH5              11
 
 
-#define DEFAULT_OUTPUT_VALUE     0    // can set any value in range [0..255] depending on planned useage
+#define DEFAULT_OUTPUT_VALUE         0  // can set any value in range [0..255] depending on planned useage
 
-#define PWM_CHANNEL_COUNT        6    // based on the physical limitations of Arduino Nano
-#define CHANNEL_UNDEFINED       -1
-#define PWM_MAX                255    // max value of 8bit pwm signal
-#define DISPLAY_STEP            25
+#define PWM_CHANNEL_COUNT            6  // based on the physical limitations of Arduino Nano
+#define CHANNEL_UNDEFINED           -1
+#define PWM_MAX                    255  // max value of 8bit pwm output
+#define DISPLAY_STEP                25  // 1/10 * PWM_MAX
 #define QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION         16
 #define HALF_OF_QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION  8
 
@@ -105,9 +112,9 @@ const char pwmChannelMap[PWM_CHANNEL_COUNT] = {
   PWM_OUTPUT_CH5
 };
 
+unsigned char outputs[PWM_CHANNEL_COUNT];     // Array for storing values of pwm channels
 
 String inputBuffer = "";                      // Variable for storing received data
-unsigned char outputs[PWM_CHANNEL_COUNT];     // Array for storing values of pwm channels
 
 
 //------------------------------------------------------------------------------
@@ -133,7 +140,7 @@ void setup() {
     oled.clear();  
   #endif
 
-  Serial.begin(9600);   //Sets the baud for serial data transmission      
+  Serial.begin(SERIAL_INPUT_BAUNDRATE);   //Sets the baud for serial data transmission      
   delay(300);
 
   for(char i=0; i<PWM_CHANNEL_COUNT; i++){
@@ -151,9 +158,9 @@ void setup() {
     #else
       oled.println("\nInput mode: 8 bit");
     #endif
-
     //oled.println("Listen serial port..");
   #endif
+
 }
 
 //------------------------------------------------------------------------------
@@ -213,6 +220,7 @@ void processLine(String line){
     showOutputs();
   #endif
 }
+
 
 
 void loop(){
