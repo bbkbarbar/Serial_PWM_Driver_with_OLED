@@ -194,13 +194,18 @@ void setup() {
   #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
     // Show start message on display
     oled.set2X();
-    oled.println("Serial\nPWM Driver\n" + String(VERSION));
+    //oled.println("Serial\nPWM Driver\n" + String(VERSION));
+    oled.println("Serial\nPWM Driver");
     oled.set1X();
+    oled.println(String(VERSION));
 
     #ifdef USE_12BIT_INPUT_VALUES
       oled.println("\nInput mode: 12 bit");
     #else
       oled.println("\nInput mode: 8 bit");
+    #endif
+    #ifdef HANDLE_FURTHER_CHANNELS  
+      oled.println("\nSerial out enabled");
     #endif
       //TODO: show on welcome screen if HANDLE_FURTHER_CHANNELS is "turned on"
     //oled.println("Listen serial port..");
@@ -242,7 +247,7 @@ int calculateOutputValue(int input){
 
 #ifdef HANDLE_FURTHER_CHANNELS
 String buildCommandOutput(unsigned short channel, unsigned short value){
-  return (String(shiftedChannelId) + " " + String(value));
+  return (String(channel) + " " + String(value));
 }
 #endif
 
@@ -271,7 +276,7 @@ void processLine(String line){
       else{ 
         // Pass commands of futher channels for the other device over softSerial bus
         unsigned short shiftedChannelId = channel - PWM_CHANNEL_COUNT;
-        serialOutput.write( buildCommandOutput(shiftedChannelId, value) + "\n" );
+        serialOutput.print( buildCommandOutput(shiftedChannelId, value) + "\n" );
       }
     #endif
 
