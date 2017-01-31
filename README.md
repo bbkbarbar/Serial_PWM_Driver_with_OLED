@@ -1,6 +1,6 @@
 # Serial PWM Driver with optional OLED display
 
-##### Version: 1.2
+##### Sw Version: 1.23
 
 ### Number of output channels:
 6 (8bit pwm outputs)
@@ -18,6 +18,9 @@ Arduino Nano
 | 8 bit      | channel_num value | integer 0..5 | 0..255  |
 | 12 bit     | channel_num value | integer 0..5 | 0..4095 |
 
+
+### TODO:
+   - create table here with SW and suitable HW versions
 
 ### Optional feautre:
     Can handle simple oled display over I2C or SoftSPI protocols for show current values.
