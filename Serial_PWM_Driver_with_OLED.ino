@@ -1,6 +1,6 @@
 /*
  * Serial PWM driver
- * version 1.23
+ * version 1.3
  * 
  * Device: 
  *     Arduino Nano
@@ -19,25 +19,29 @@
  *
  *
  * Optional feature:
+ *  -  Display:
  *     Can handle simple oled display for show current values over I2C or SoftSPI
  *     For this feature define one of following macros: 
- *           USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
+ *           USE_OLED_DISPLAY_I2C or 
+ *           USE_OLED_DISPLAY_SPI
  *     Note: In case of using SPI display, need to define proper values for the following macros:
  *           OLED_DC, OLED_CS, OLED_D0, OLED_D1, OLED_RST
  *           In case of using I2C display, need to define proper value 
  *           for "I2C_ADDRESS_OF_DISPLAY" macro.
  * 
- * 
- * Further option: (just implemented, NOT TESTED yet!)
- * Handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
- * Plan: for further channels use a second SoftwareSerial bus
- * for send command for an other instance of Serial PWM driver
+ *  -  Further channels:
+ *     Can handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
+ *     If this feature is in use, then it forwards the received commands for a "slave instance" when 
+ *     the channel id (of the received command) is over the range of "own channels".
+ *     A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
+ *     For this feature define the following macro: 
+ *           HANDLE_FURTHER_CHANNELS
  * 
  * 
  * Created by: Andras Boor
  * 2017.01.
  */
-#define VERSION  "v1.23"
+#define VERSION  "v1.3"
 
 
 /*
@@ -215,7 +219,21 @@ void setup() {
 
 //=================================================================================
 
-
+/*
+ * Show the current values of own pwm channels on oled display. 
+ *
+ * Example output:
+ *     "ch0:   7 #          "
+ *     "ch1: 255 ###########"
+ *     "ch2: 127 ######     "
+ *     "ch3:   0            "
+ *     "ch4:  40 ##         "
+ *     "ch5:   0            "
+ *
+ * Note: this function will be compiled only if 
+ *       USE_OLED_DISPLAY_I2C macro or USE_OLED_DISPLAY_SPI macro is used.
+ *
+ */
 #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
 void showOutputs(){
   oled.clear();
@@ -234,24 +252,68 @@ void showOutputs(){
 #endif
 
 
+/*
+ * Calculate the appropriate output value 
+ * In case of "12bit mode", it calculatates the appropriate value for 8bit wide outputs.
+ */
 int calculateOutputValue(int input){
   int output;
+
   #ifdef USE_12BIT_INPUT_VALUES
     output = ((input + HALF_OF_QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION) / QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION);
   #else
     output = input;
   #endif
+
+  // Keep output value in valide range [0..PWM_MAX]
+  if(output > PWM_MAX) {
+    output = PWM_MAX;
+  }else
+  if(output < 0) {
+    output = 0;
+  }
+
   return output;
 }
 
 
+/*
+ * Create line to forward command that wants to set channel for a channel what is out of our range.
+ * Calculates new channel id for forwarded command.
+ *
+ * Example input:
+ *     inputChannelId:   8
+ *     value:          255
+ * Example output:
+ *     "2 255"
+ *
+ * Overall channel 8 means the 2nd channel what is over our range,
+ * so the 2nd channel of slave device is the 8th channel in overall.
+ *
+ * Note: this function will be compiled only if HANDLE_FURTHER_CHANNELS macro is used.
+ *
+ */
 #ifdef HANDLE_FURTHER_CHANNELS
-String buildCommandOutput(unsigned short channel, unsigned short value){
-  return (String(channel) + " " + String(value));
+String buildCommandOutput(int inputChannelId, unsigned short value){
+  unsigned short shiftedChannelId = inputChannelId - PWM_CHANNEL_COUNT;
+  return (String(shiftedChannelId) + " " + String(value));
 }
 #endif
 
 
+/*
+ * Process input command (what received over serial port)
+ * Sample inputs:
+ *     - in  8bit mode: "2 255" -> 100% duty cycle of pwm output on channel 2
+ *     - in 12bit mode: "0 2047" -> 50% duty cycle of pwm output on channel 0
+ * This function does:
+ *     - Gets the appropriate output value (in case of "12bit mode", it calculatates the appropriate value for 8bit wide outputs)
+ *     - If channelId is within range of "own channels" (0..5) than it sets pwm outputs on specified channel.
+ *     - If "HANDLE_FURTHER_CHANNELS" function enabled and the given channelId is out of "own channels" range 
+ *       than it forwards the received command with decreased channel id for the "slave" instance.
+ *     - If "using oled display" function is enabled then the current values of own channels will be shown on the display
+ * 
+ */
 void processLine(String line){
 
   //int channel = ((String)(line.charAt(0))).toInt();
@@ -262,21 +324,16 @@ void processLine(String line){
 
   if(channel > CHANNEL_UNDEFINED){
     int value = calculateOutputValue(((String)(line.substring(2))).toInt());
-    if(value > PWM_MAX) {
-      value = PWM_MAX;
-    }
   
     if(channel < PWM_CHANNEL_COUNT){
       outputs[channel] = value;
       // Set own pwm output of according to processed channel number and value..
       analogWrite(pwmChannelMap[channel], value);
     }
-    #ifdef HANDLE_FURTHER_CHANNELS
-      //TODO: try it out
+    #ifdef HANDLE_FURTHER_CHANNELS  //TODO: try it out
       else{ 
-        // Pass commands of futher channels for the other device over softSerial bus
-        unsigned short shiftedChannelId = channel - PWM_CHANNEL_COUNT;
-        serialOutput.print( buildCommandOutput(shiftedChannelId, value) + "\n" );
+        // Forward commands of futher channels for the other device over softSerial bus
+        serialOutput.print( buildCommandOutput(channel, value) + "\n" );
       }
     #endif
 
