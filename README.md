@@ -23,12 +23,11 @@ Arduino Nano
    - create table here with SW and suitable HW versions
 
 ### Optional feautres:
-##### Display can be attached:
+
+##### Display can be attached (used library: [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
     Can handle simple oled display over I2C or SoftSPI protocols for show current values.
     For this feature define one of following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
     Used library for handling OLED display:
-
-###### [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii)
 
 ##### Handling further channels:
     Can handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
@@ -37,7 +36,7 @@ Arduino Nano
 
 
 
-    Testing v1.0 with display:
+### Testing v1.2 with display:
 ![Testing @ v1.0](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Documents/Testing_v1_0.png "Testing @ v1.0")
 ![Testing @ v1.2](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Breadboard_Testing_v1.2.png "Testing @ v1.2")
 
