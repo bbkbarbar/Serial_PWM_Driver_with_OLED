@@ -31,7 +31,8 @@ Arduino Nano
 
 ##### Handling further channels:
     Can handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
-    If this feature is in use, then it forwards the received commands for a "slave instance" when the channel id (of the received command) is over the range of "own channels".
+    If this feature is in use, then it forwards the received commands for a "slave instance" 
+    when the channel id (of the received command) is over the range of "own channels".
     A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
 
 
