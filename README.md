@@ -1,6 +1,6 @@
 # Serial PWM Driver with optional OLED display
 
-##### Sw Version: 1.23
+##### Sw Version: 1.3
 
 ### Number of output channels:
 6 (8bit pwm outputs)
