@@ -19,19 +19,16 @@ Arduino Nano
 | 12 bit     | channel_num value | integer 0..5 | 0..4095 |
 
 
-### TODO:
-   - create table here with SW and suitable HW versions
-
 ### Optional feautres:
 
 ##### Display can be attached (used library: [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
     Can handle simple oled display over I2C or SoftSPI protocols for show current values.
-    For this feature define one of following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
+    For this feature define one of the following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
     Used library for handling OLED display:
 
 ##### Handling further channels:
     Can handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
-    If this feature is in use, then it forwards the received commands for a "slave instance" 
+    If this feature is in use, then it forwards the received commands for a "slave instance"
     when the channel id (of the received command) is over the range of "own channels".
     A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
 
