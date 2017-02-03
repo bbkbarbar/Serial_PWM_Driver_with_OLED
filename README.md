@@ -43,6 +43,17 @@ Handle more than 6 channels (what is the physical limitation by number of arduin
 Plan: for further channels use a second serial bus (softSerial)
 for send command for an other instance of Serial PWM driver
 
+### Memory and program storage useage on ATmega328 (Arduino Nano v1.3):
+
+##### With OLED display (on I2C bus) and using further channels:
+4312 bytes (14%) of program storage is used.
+212 bytes (10%) of dynamic memory is used.
+
+##### Without any optional feature:
+8876 bytes (28%) of program storage is used.
+ 425 bytes (20%) of dynamic memory is used.
+
+
 
 ### Eagle schamatic available as zip:
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
