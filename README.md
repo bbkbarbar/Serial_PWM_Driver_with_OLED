@@ -54,10 +54,6 @@ Send pwm commands from raspberryPi using the [attached python script](https://gi
 Two instances after command has been received
 ![Two instances after command has been received](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_2.png "Two instances after command has been received")
 
-### Further options (not implemented yet):
-Handle more than 6 channels (what is the physical limitation by number of arduino's pwm channels)
-Plan: for further channels use a second serial bus (softSerial)
-for send command for an other instance of Serial PWM driver
 
 ### Memory and program storage utilization on ATmega328 (Arduino Nano v1.3):
 
