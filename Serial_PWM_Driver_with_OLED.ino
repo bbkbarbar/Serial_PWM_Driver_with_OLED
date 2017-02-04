@@ -108,11 +108,11 @@
   #include "SSD1306AsciiSoftSpi.h"
 
   // pin definitions for using SPI oled display over softSpi
-  #define OLED_DC                   14
-  #define OLED_CS                   15
-  #define OLED_D0                   16
-  #define OLED_D1                   17
-  #define OLED_RST                  18  
+  #define OLED_DC                   14    // A0
+  #define OLED_CS                   15    // A1
+  #define OLED_D0                   16    // A2
+  #define OLED_D1                   17    // A3
+  #define OLED_RST                  18    // A4
 
   SSD1306AsciiSoftSpi oled;
 #endif
@@ -318,7 +318,11 @@ void processLine(String line){
 
   //int channel = ((String)(line.charAt(0))).toInt();
   int channel = ((String)(line.substring(0,line.indexOf(' ')))).toInt();
-  if((channel < 0) || (channel >= PWM_CHANNEL_COUNT)){
+  if((channel < 0) 
+      #ifndef HANDLE_FURTHER_CHANNELS
+        || (channel >= PWM_CHANNEL_COUNT)
+      #endif
+  ){
     channel = CHANNEL_UNDEFINED;
   }
 
@@ -330,7 +334,7 @@ void processLine(String line){
       // Set own pwm output of according to processed channel number and value..
       analogWrite(pwmChannelMap[channel], value);
     }
-    #ifdef HANDLE_FURTHER_CHANNELS  //TODO: try it out
+    #ifdef HANDLE_FURTHER_CHANNELS
       else{ 
         // Forward commands of futher channels for the other device over softSerial bus
         serialOutput.print( buildCommandOutput(channel, value) + "\n" );
