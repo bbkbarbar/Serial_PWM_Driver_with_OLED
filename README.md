@@ -12,12 +12,15 @@
 Arduino Nano
 
 ### Required input line over serial communication:
+Input line: *"channel_num value"*
 
-| Input mode | Input line        | channel_num  | value   |
-| :--------: | :---------------: | :----------: | :-----: |
-| 8 bit      | channel_num value | integer 0..5 | 0..255  |
-| 12 bit     | channel_num value | integer 0..5 | 0..4095 |
-
+| Input mode | Using "further channels" option | channel_num       | value   |
+| :--------: | :-----------------------------: | :---------------: | :-----: |
+| 8 bit      | No                              | (int) 0..5        | 0..255  |
+| 8 bit      | Yes                             | (int) 0..*ch_max* | 0..255  |
+| 12 bit     | No                              | (int) 0..5        | 0..4095 |
+| 12 bit     | Yes                             | (int) 0..*ch_max* | 0..4095 |
+*ch_max*: depens on the count of devices: 6 * device count
 
 ### Optional feautres:
 
