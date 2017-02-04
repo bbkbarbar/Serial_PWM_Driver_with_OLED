@@ -46,7 +46,7 @@ v1.2 with I2C display and sample output RGB leds
 ### Testing v1.3 with 2 instances with I2C and SPI displays:
 
 Two instances (left one is the "master device" with blue I2C display and "FURTHER_CHANNELS" feature enabled, right one with white SPI display)
-![Two instances (left one is the "master device" with blue I2C display and "FURTHER_CHANNELS" feature enabled, right one with white SPI display)](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_1.png "Two instances (left one is the "master device" with blue I2C display and "FURTHER_CHANNELS" feature enabled, right one with white SPI display)")
+![Two instances (left one is the "master device" with blue I2C display and "FURTHER_CHANNELS" feature enabled, right one with white SPI display)](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_1.png)
 
 Send pwm commands from raspberryPi using the [attached python script](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Testing_with_RaspberryPi/pwm_serial_12ch.py):
 ![Send pwm commands from raspberryPi with attached python script](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_Send_commands_from_Pi.png "Send pwm commands from raspberryPi with attached python script")
