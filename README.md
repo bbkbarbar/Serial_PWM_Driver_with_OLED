@@ -29,7 +29,7 @@ Arduino Nano
 Input line: *channel_num value*
 
 | Input mode | Using "further channels" option | channel_num       | value   |
-| :--------: | :-----------------------------: | :---------------: | :-----: |
+| :--------: | :-----------------------------: | :---------------- | :-----: |
 | 8 bit      | No                              | (int) 0..5        | 0..255  |
 | 8 bit      | Yes                             | (int) 0..*ch_max* | 0..255  |
 | 12 bit     | No                              | (int) 0..5        | 0..4095 |
