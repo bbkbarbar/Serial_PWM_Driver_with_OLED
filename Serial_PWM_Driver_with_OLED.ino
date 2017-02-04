@@ -108,11 +108,11 @@
   #include "SSD1306AsciiSoftSpi.h"
 
   // pin definitions for using SPI oled display over softSpi
-  #define OLED_DC                   14    // A0
-  #define OLED_CS                   15    // A1
-  #define OLED_D0                   16    // A2
+  #define OLED_D0                   18    // A4
   #define OLED_D1                   17    // A3
-  #define OLED_RST                  18    // A4
+  #define OLED_RST                  16    // A2
+  #define OLED_DC                   15    // A1
+  #define OLED_CS                   14    // A0
 
   SSD1306AsciiSoftSpi oled;
 #endif
