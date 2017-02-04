@@ -1,15 +1,29 @@
 # Serial PWM Driver with optional OLED display
 
-##### Sw Version: 1.3
+##### Version: 1.3
+
+### Device:
+Arduino Nano
 
 ### Number of output channels:
-6 (8bit pwm outputs)
+6 channels with 8 bit PWM outputs - based on physical limitation of arduino board.
 
     Note: Can handle 12bit inputs too.
     For this function define macro: USE_12BIT_INPUT_VALUES
 
-### Device:
-Arduino Nano
+### Optional feautres:
+
+##### Display can be used (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
+    Can handle simple oled display over I2C or SoftSPI protocols to show current values.
+    For this feature define one of the following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
+
+##### Handling further channels:
+    Can handle more channel than 6 (what is the physical limitation
+    by number of pwm channels on Arduino Nano board)
+    If this feature is in use, then it forwards the received commands for a "slave instance"
+    when the channel id (of the received command) is over the range of "own channels".
+    A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
+
 
 ### Required input line over serial communication:
 Input line: *channel_num value*
@@ -21,20 +35,6 @@ Input line: *channel_num value*
 | 12 bit     | No                              | (int) 0..5        | 0..4095 |
 | 12 bit     | Yes                             | (int) 0..*ch_max* | 0..4095 |
 *ch_max*: depens on the count of devices (= 6 * device count)
-
-### Optional feautres:
-
-##### Display can be attached (used library: [Arduino-SSD1306Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
-    Can handle simple oled display over I2C or SoftSPI protocols for show current values.
-    For this feature define one of the following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
-    Used library for handling OLED display:
-
-##### Handling further channels:
-    Can handle more channel than 6 (what is the physical limitation by number of arduino's pwm channels)
-    If this feature is in use, then it forwards the received commands for a "slave instance"
-    when the channel id (of the received command) is over the range of "own channels".
-    A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
-
 
 
 ### Testing v1.0 and v1.2 with display:
