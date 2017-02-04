@@ -12,7 +12,7 @@
 Arduino Nano
 
 ### Required input line over serial communication:
-Input line: *"channel_num value"*
+Input line: *channel_num value*
 
 | Input mode | Using "further channels" option | channel_num       | value   |
 | :--------: | :-----------------------------: | :---------------: | :-----: |
