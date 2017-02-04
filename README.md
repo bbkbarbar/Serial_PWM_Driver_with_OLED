@@ -72,8 +72,9 @@ for send command for an other instance of Serial PWM driver
 
 
 ### ToDo:
- - [ ] Modify PCB design to leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
-
+ - [ ] Modify pinout config of softSpi display according to the pin order on display's pcb.
+ - [ ] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
+ - [ ] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
 
 #### Created by:
 Andras Boor
