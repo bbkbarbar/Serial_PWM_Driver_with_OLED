@@ -68,9 +68,10 @@ Two instances after command has been received
 
 
 ### ToDo:
- - [ ] Modify pinout config of softSpi display according to the pin order on display's pcb.
- - [ ] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
- - [ ] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
+ - [x] Modify pinout config of softSpi display according to the pin order on display's pcb.
+ - [x] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
+ - [X] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
+ - [ ] Check appropirate layout (enaugh space for connect additional boards directly)
 
 #### Created by:
 Andras Boor
