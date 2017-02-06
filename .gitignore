@@ -10,3 +10,7 @@
 *.brd
 *.s#*
 *.b#*
+
+
+* Fritling regenerated library files
+p*.db
