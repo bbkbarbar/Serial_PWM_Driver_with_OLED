@@ -66,7 +66,7 @@ Two instances after command has been received
 ### Eagle schamatic available as zip:
 ![PCB design v1.42](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.42.png)
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
-<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_schematic_v1.3.pdf)
+<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_schematic_v1.42.pdf)
 
 
 ### ToDo:
