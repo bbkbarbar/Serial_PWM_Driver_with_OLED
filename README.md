@@ -72,6 +72,8 @@ Two instances after command has been received
  - [x] Modify pinout config of softSpi display according to the pin order on display's pcb.
  - [x] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
  - [X] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
+ - [ ] Add termial connector for using optional 5V power supply for arduino (e.g. get VCC power directly from raspberry)
+ - [ ] Measure the power consumption before start using with direct 5V power supply)
  - [ ] Check appropirate layout (enaugh space for connect additional boards directly)
 
 #### Created by:
