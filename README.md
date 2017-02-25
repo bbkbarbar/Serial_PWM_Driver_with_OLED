@@ -54,6 +54,10 @@ Send pwm commands from raspberryPi using the [attached python script](https://gi
 Two instances after command has been received
 ![Two instances after command has been received](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_2.png "Two instances after command has been received")
 
+### Testing sw v1.3 and hw v1.44 with all parts on output side in breadboard
+![Testing with 0% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_OFF.png)
+
+![Testing with 100% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_ON.png)
 
 ### Memory and program storage utilization on ATmega328 (Arduino Nano v1.3):
 
@@ -63,11 +67,12 @@ Two instances after command has been received
 | Without any optional feature                | 8876 bytes (28%) | 425 bytes (20%) |
 
 
-### Eagle schamatic available as zip:
-![PCB design v1.42](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.42.png)
 
+![PCB design v1.44](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.44.png)
+
+### Eagle schamatic available as zip:
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
-<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.42.pdf)
+<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.44.pdf)
 
 
 ### ToDo:
