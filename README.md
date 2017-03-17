@@ -68,18 +68,18 @@ Two instances after command has been received
 
 
 
-![PCB design v1.44](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.44.png)
+![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
 
 ### Eagle schamatic available as zip:
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
-<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.44.pdf)
+<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.45_bottom.pdf)
 
 
 ### ToDo:
  - [x] Modify pinout config of softSpi display according to the pin order on display's pcb.
  - [x] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
  - [X] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
- - [ ] Add termial connector for using optional 5V power supply for arduino (e.g. get VCC power directly from raspberry)
+ - [X] Add termial connector for using optional 5V power supply for arduino (e.g. get VCC power directly from raspberry)
  - [ ] Measure the power consumption before start using with direct 5V power supply)
  - [ ] Check appropirate layout (enaugh space for connect additional boards directly)
 
