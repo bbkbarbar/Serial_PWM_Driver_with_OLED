@@ -1,6 +1,7 @@
 # Serial PWM Driver with optional OLED display
 
-##### Version: 1.3
+##### Firmware version: 1.31
+##### Hardware version: 1.45
 
 ### Device:
 Arduino Nano
