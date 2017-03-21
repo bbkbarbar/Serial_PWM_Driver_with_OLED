@@ -83,6 +83,8 @@ Two instances after command has been received
  - [X] Add termial connector for using optional 5V power supply for arduino (e.g. get VCC power directly from raspberry)
  - [X] Measure the power consumption before start using with direct 5V power supply (31mA)
  - [ ] Check appropirate layout (enaugh space for connect additional boards directly)
+ - [ ] Create RTU PCB version
+ - [ ] Build first usable prototype
 
 #### Created by:
 Andras Boor
