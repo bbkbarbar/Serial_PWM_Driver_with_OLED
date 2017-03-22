@@ -6,9 +6,9 @@ import datetime
 import serial
 
 # Constants
-outout_channel_of_red   = 0     # 1
-outout_channel_of_green = 1 	# 0
-outout_channel_of_blue  = 2
+outout_channel_of_red   = 1     # 1
+outout_channel_of_green = 2 	# 0
+outout_channel_of_blue  = 0
 
 def write_to_file(data):
 	homePath = os.environ["HOME"]
