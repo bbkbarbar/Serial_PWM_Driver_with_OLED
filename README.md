@@ -4,7 +4,22 @@
 ##### Hardware version: 1.45
 
 #### Table of content:
- - [Measurements](#Measurements)
+- [Requirements](#Requirements)
+  - [Device:](#Device)
+  - [Number of output channels:](#output_channels)
+  - [Required input line over serial communication:](#Required_input_line)
+- [Optional feautres:](#Optional_feautres)
+  - [Display can be used](#Display_can be_used)
+  - [Handling further channels:](#further_channels)
+- [Testing, prototyping](#testing_protoryping)
+  - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
+- [PCB design](#PCB_design)
+  - [PCB prototype](#PCB_prototype)
+  - [First prototype dry test](#prototype_dry_test)
+- [Measurements](#Measurements)
+  - [Power consumption](#power_consumption)
+  - [Memory and program storage utilization on ATmega328](#memory_useage)
+- [ToDo:](#todo)
 
 
 
@@ -19,7 +34,7 @@ Arduino Nano v3
     Note: Can handle 12bit inputs too.
     For this function define macro: USE_12BIT_INPUT_VALUES
 
-#### <a name="Required_input_line"> Required input line over serial communication: </a>
+##### <a name="Required_input_line"> Required input line over serial communication: </a>
     Input line: *channel_num value*
 
     | Input mode | Using "further channels" option | channel_num       | value   |
@@ -30,7 +45,7 @@ Arduino Nano v3
     | 12 bit     | Yes                             | (int) 0..*ch_max* | 0..4095 |
     *ch_max*: depens on the count of devices (= 6 * device count)
 
-#### <a name="Optional_feautres"> Optional feautres: </a>
+### <a name="Optional_feautres"> Optional feautres: </a>
 
 ###### <a name="Display_can be_used"> Display can be used </a> (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
     Can handle simple oled display over I2C or SoftSPI protocols to show current values.
@@ -63,7 +78,7 @@ Send pwm commands from raspberryPi using the [attached python script](https://gi
 Two instances after command has been received
 ![Two instances after command has been received](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_2.png "Two instances after command has been received")
 
-##### Breadboard testing with all parts on output side
+##### <a name="Breadboard_testing_with_outputs"> Breadboard testing with all parts on output side </a>
 Firmware v1.3
 
 Used layout as Hw v1.44
@@ -72,19 +87,19 @@ Used layout as Hw v1.44
 
 ![Testing with 100% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_ON.png)
 
-## PCB design
+## <a name="PCB_design"> PCB design </a>
 ![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
 
 ##### Eagle schamatic available as zip & pdf:
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
 <br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.45_bottom.pdf)
 
-##### PCB prototype (hw v1.45)
+##### <a name="PCB_prototype"> PCB prototype </a> (hw v1.45)
 ![PCB prototype 1](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_1.png)
 
 ![PCB prototype 2](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_2.png)
 
-##### First prototype dry test
+##### <a name="prototype_dry_test"> First prototype dry test </a>
  - Firmware v1.3
  - Hw v1.45
 
@@ -93,7 +108,7 @@ Used layout as Hw v1.44
 
 ### <a name="Measurements"> Measurements </a>
 
-##### Power consumption
+##### <a name="power_consumption"> Power consumption </a>
 On MCU side:
 
 | Condition                   | Consumption on VCC    |
@@ -102,7 +117,7 @@ On MCU side:
 | 100% output on 1 channel    | 34,4 mA               |
 | 100% output on all channels | 51,4 mA (calculated)  |
 
-##### Memory and program storage utilization on ATmega328 (Arduino Nano v1.3):
+##### <a name="memory_useage">  Memory and program storage utilization on ATmega328 </a> (Arduino Nano v1.3):
 
 | Option(s) used                              | Program storage  | Dynamic memory  |
 | :-----------------------------------------: | :--------------: | :-------------: |
@@ -111,7 +126,7 @@ On MCU side:
 
 
 
-### ToDo:
+### <a name="todo"> ToDo: </a>
  - [x] Modify pinout config of softSpi display according to the pin order on display's pcb.
  - [x] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
  - [X] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
