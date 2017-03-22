@@ -5,12 +5,12 @@
 
 #### Table of content:
 - [Requirements](#Requirements)
-  - [Device:](#Device)
-  - [Number of output channels:](#output_channels)
-  - [Required input line over serial communication:](#Required_input_line)
-- [Optional feautres:](#Optional_feautres)
+  - [Device](#Device)
+  - [Number of output channels](#output_channels)
+  - [Required input line over serial communication](#Required_input_line)
+- [Optional feautres](#Optional_feautres)
   - [Display can be used](#Display_can_be_used)
-  - [Handling further channels:](#further_channels)
+  - [Handling further channels](#further_channels)
 - [Testing, prototyping](#testing_protoryping)
   - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
 - [PCB design](#PCB_design)
@@ -19,7 +19,7 @@
 - [Measurements](#Measurements)
   - [Power consumption](#power_consumption)
   - [Memory and program storage utilization on ATmega328](#memory_useage)
-- [ToDo:](#todo)
+- [ToDo list](#todo)
 
 
 
