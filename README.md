@@ -1,6 +1,6 @@
 # Serial PWM Driver with optional OLED display
 
- - [Measurements](#measurements)
+ - [Measurements](#Measurements)
 
 ##### Firmware version: 1.31
 ##### Hardware version: 1.45
@@ -84,7 +84,7 @@ Two instances after command has been received
 ![First prototype dry test](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Prototype_dry_test.png)
 
 
-### Measurements <a name="measurements"></a>
+### <a name="Measurements"> Measurements </a>
 
 ##### Power consumption
 On MCU side:
