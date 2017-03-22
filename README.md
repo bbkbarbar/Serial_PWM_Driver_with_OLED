@@ -5,12 +5,12 @@
 
 #### Table of content:
 - [Requirements](#Requirements)
-  - [Device](#Device)
+  - [Used MCU](#Device)
   - [Number of output channels](#output_channels)
-  - [Required input line over serial communication](#Required_input_line)
 - [Optional feautres](#Optional_feautres)
   - [Display can be used](#Display_can_be_used)
   - [Handling further channels](#further_channels)
+- [Required input line over serial communication](#Required_input_line)
 - [Testing, prototyping](#testing_protoryping)
   - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
 - [PCB design](#PCB_design)
@@ -26,39 +26,56 @@
 
 ## <a name="Requirements"> Requirements </a>
 
-##### <a name="Device"> Device: </a>
-Arduino Nano v3
+This device can control individual PWM outputs as "channels".
+It get commands from any other device over serial communication. (e.g.: from a Raspberry Pi or a Bluetooth Serial module)
+It need to be able to control any DC device at least with 5A power consumption per channel.
+
+
+##### <a name="Device"> Used MCU: </a>
+Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057872.m2749.l2649&ssPageName=STRK%3AMEBIDX%3AIT)
 
 ##### <a name="output_channels"> Number of output channels: </a>
 6 channels with 8 bit PWM outputs - based on physical limitation of arduino board.
 
     Note: Can handle 12bit inputs too.
-    For this function define macro: USE_12BIT_INPUT_VALUES
+    For this function define macro:
 
-##### <a name="Required_input_line"> Required input line over serial communication: </a>
-    Input line: channel_num value
+        USE_12BIT_INPUT_VALUES
 
-    | Input mode | Using "further channels" option | channel_num     | value   |
-    | ---------- | ------------------------------- | --------------- | ------- |
-    | 8 bit      | No                              | (int) 0..5      | 0..255  |
-    | 8 bit      | Yes                             | (int) 0..ch_max | 0..255  |
-    | 12 bit     | No                              | (int) 0..5      | 0..4095 |
-    | 12 bit     | Yes                             | (int) 0..ch_max | 0..4095 |
-    ch_max: depens on the count of devices (= 6 * device count)
 
 ### <a name="Optional_feautres"> Optional feautres: </a>
 
 ###### <a name="Display_can_be_used"> Display can be used </a> (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
     Can handle simple oled display over I2C or SoftSPI protocols to show current values.
-    For this feature define one of the following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
+    For this feature define one of the following macros:
+
+        USE_OLED_DISPLAY_I2C or
+        USE_OLED_DISPLAY_SPI
+
 
 ###### <a name="further_channels"> Handling further channels: </a>
     Can handle more channel than 6 (what is the physical limitation
     by number of pwm channels on Arduino Nano board)
     If this feature is in use, then it forwards the received commands for a "slave instance"
     when the channel id (of the received command) is over the range of "own channels".
-    A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
+    A second, SoftwareSerial bus is used for forwarding of command to the slave instance of Serial PWM driver
+    For this feature define the following macro:
 
+        HANDLE_FURTHER_CHANNELS
+
+### <a name="Required_input_line"> Required input line over serial communication: </a>
+    Input line: channel_num value
+    Examples: 0 255
+              5 4095
+
+    | Input mode | Using "further channels" option | channel_num     | value   |
+    | ---------- | ------------------------------- | --------------- | ------- |
+    |    8 bit   |              No                 | (int) 0..5      | 0.. 255 |
+    |    8 bit   |              Yes                | (int) 0..ch_max | 0.. 255 |
+    |   12 bit   |              No                 | (int) 0..5      | 0..4095 |
+    |   12 bit   |              Yes                | (int) 0..ch_max | 0..4095 |
+
+    ch_max: depens on the count of devices (= 6 * device count)
 
 ## <a name="testing_protoryping"> Testing, prototyping </a>
 
