@@ -84,8 +84,7 @@ Two instances after command has been received
 ![First prototype dry test](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Prototype_dry_test.png)
 
 
-### Measurements
-<a name="measurements"></a>
+### <a name="measurements"> Measurements </a>
 
 ##### Power consumption
 On MCU side:
