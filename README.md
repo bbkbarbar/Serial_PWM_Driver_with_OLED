@@ -14,6 +14,7 @@
 - [Testing, prototyping](#testing_protoryping)
   - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
 - [PCB design](#PCB_design)
+  - [Part list](#part_list)
   - [PCB prototype](#PCB_prototype)
   - [First prototype dry test](#prototype_dry_test)
 - [Measurements](#Measurements)
@@ -93,6 +94,10 @@ Used layout as Hw v1.44
 ##### Eagle schamatic available as zip & pdf:
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
 <br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.45_bottom.pdf)
+
+##### <a name="part_list"> Part list </a> available as [HeStore](https://www.hestore.hu/) basket:
+ - [Complete](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Schematic_designs/Part%20lists/hestore_buy_list_v1.45_Complete.xml)
+ - [Without arduino](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Schematic_designs/Part%20lists/hestore_buy_list_v1.45_without_Arduino.xml)
 
 ##### <a name="PCB_prototype"> PCB prototype </a> (hw v1.45)
 ![PCB prototype 1](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_1.png)
