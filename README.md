@@ -1,26 +1,42 @@
 # Serial PWM Driver with optional OLED display
 
- - [Measurements](#Measurements)
-
 ##### Firmware version: 1.31
 ##### Hardware version: 1.45
 
-### Device:
-Arduino Nano
+#### Table of content:
+ - [Measurements](#Measurements)
 
-### Number of output channels:
+
+
+## <a name="Requirements"> Requirements </a>
+
+##### <a name="Device"> Device: </a>
+Arduino Nano v3
+
+##### <a name="output_channels"> Number of output channels: </a>
 6 channels with 8 bit PWM outputs - based on physical limitation of arduino board.
 
     Note: Can handle 12bit inputs too.
     For this function define macro: USE_12BIT_INPUT_VALUES
 
-### Optional feautres:
+#### <a name="Required_input_line"> Required input line over serial communication: </a>
+    Input line: *channel_num value*
 
-##### Display can be used (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
+    | Input mode | Using "further channels" option | channel_num       | value   |
+    | :--------: | :-----------------------------: | :---------------- | :-----: |
+    | 8 bit      | No                              | (int) 0..5        | 0..255  |
+    | 8 bit      | Yes                             | (int) 0..*ch_max* | 0..255  |
+    | 12 bit     | No                              | (int) 0..5        | 0..4095 |
+    | 12 bit     | Yes                             | (int) 0..*ch_max* | 0..4095 |
+    *ch_max*: depens on the count of devices (= 6 * device count)
+
+#### <a name="Optional_feautres"> Optional feautres: </a>
+
+###### <a name="Display_can be_used"> Display can be used </a> (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
     Can handle simple oled display over I2C or SoftSPI protocols to show current values.
     For this feature define one of the following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
 
-##### Handling further channels:
+###### <a name="further_channels"> Handling further channels: </a>
     Can handle more channel than 6 (what is the physical limitation
     by number of pwm channels on Arduino Nano board)
     If this feature is in use, then it forwards the received commands for a "slave instance"
@@ -28,25 +44,15 @@ Arduino Nano
     A second, SoftwareSerial bus is used for forwarding of command to the slace instance of Serial PWM driver
 
 
-### Required input line over serial communication:
-Input line: *channel_num value*
+## <a name="testing_protoryping"> Testing, prototyping </a>
 
-| Input mode | Using "further channels" option | channel_num       | value   |
-| :--------: | :-----------------------------: | :---------------- | :-----: |
-| 8 bit      | No                              | (int) 0..5        | 0..255  |
-| 8 bit      | Yes                             | (int) 0..*ch_max* | 0..255  |
-| 12 bit     | No                              | (int) 0..5        | 0..4095 |
-| 12 bit     | Yes                             | (int) 0..*ch_max* | 0..4095 |
-*ch_max*: depens on the count of devices (= 6 * device count)
-
-
-### Testing v1.0 and v1.2 with display:
+##### Testing v1.0 and v1.2 with display:
 v1.0 with I2C display
 ![Testing @ v1.0 with I2C display](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_v1_0.png "v1.0 with I2C display")
 v1.2 with I2C display and sample output RGB leds
 ![v1.2 with I2C display and sample output RGB leds](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Breadboard_Testing_v1.2.png "v1.2 with I2C display and sample output RGB leds")
 
-### Testing v1.3 with 2 instances with I2C and SPI displays:
+##### Testing v1.3 with 2 instances with I2C and SPI displays:
 
 Two instances (left one is the "master device" with blue I2C display and "FURTHER_CHANNELS" feature enabled, right one with white SPI display)
 ![Two instances (left one is the "master device" with blue I2C display and "FURTHER_CHANNELS" feature enabled, right one with white SPI display)](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_1.png)
@@ -57,27 +63,28 @@ Send pwm commands from raspberryPi using the [attached python script](https://gi
 Two instances after command has been received
 ![Two instances after command has been received](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_2.png "Two instances after command has been received")
 
-### Breadboard testing with all parts on output side
-###### Firmware v1.3
-###### layout as Hw v1.44
+##### Breadboard testing with all parts on output side
+Firmware v1.3
+
+Used layout as Hw v1.44
 
 ![Testing with 0% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_OFF.png)
 
 ![Testing with 100% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_ON.png)
 
-### PCB design
+## PCB design
 ![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
 
-### Eagle schamatic available as zip & pdf:
+##### Eagle schamatic available as zip & pdf:
 [Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
 <br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.45_bottom.pdf)
 
-### PCB prototype (hw v1.45)
+##### PCB prototype (hw v1.45)
 ![PCB prototype 1](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_1.png)
 
 ![PCB prototype 2](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_2.png)
 
-### First prototype dry test
+##### First prototype dry test
  - Firmware v1.3
  - Hw v1.45
 
