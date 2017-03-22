@@ -63,6 +63,13 @@ Two instances after command has been received
 
 ![Testing with 100% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_ON.png)
 
+### PCB design
+![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
+
+### Eagle schamatic available as zip & pdf:
+[Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
+<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.45_bottom.pdf)
+
 ### PCB prototype (hw v1.45)
 ![PCB prototype 1](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_1.png)
 
@@ -75,18 +82,24 @@ Two instances after command has been received
 ![First prototype dry test](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Prototype_dry_test.png)
 
 
-### Memory and program storage utilization on ATmega328 (Arduino Nano v1.3):
+### Measurements
+
+##### Power consumption
+On MCU side:
+
+| Condition                   | Consumption on VCC    |
+| :-------------------------: | :-------------------: |
+| 0% output on all channels   | 31,0 mA               |
+| 100% output on 1 channel    | 34,4 mA               |
+| 100% output on all channels | 51,4 mA (calculated)  |
+
+##### Memory and program storage utilization on ATmega328 (Arduino Nano v1.3):
 
 | Option(s) used                              | Program storage  | Dynamic memory  |
 | :-----------------------------------------: | :--------------: | :-------------: |
 | With I2C display and using further channels | 4312 bytes (14%) | 212 bytes (10%) |
 | Without any optional feature                | 8876 bytes (28%) | 425 bytes (20%) |
 
-![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
-
-### Eagle schamatic available as zip:
-[Serial_PWM_Driver_eagle_design](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/blob/master/Schematic_designs/Eagle_designs/Serial_PWM_driver_-_Eagle_desing.zip)
-<br>[PCB design as PDF](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Schematic_designs/Eagle_designs/PCB_design_v1.45_bottom.pdf)
 
 
 ### ToDo:
@@ -99,6 +112,7 @@ Two instances after command has been received
  - [X] Create RTU PCB version
  - [X] Build first usable prototype
  - [ ] Testing with real output devices
+ - [ ] Measure power consumption with real output devices
 
 #### Created by:
 Andras Boor
