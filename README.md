@@ -55,10 +55,22 @@ Send pwm commands from raspberryPi using the [attached python script](https://gi
 Two instances after command has been received
 ![Two instances after command has been received](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_2.png "Two instances after command has been received")
 
-### Testing sw v1.3 and hw v1.44 with all parts on output side in breadboard
+### Breadboard testing with all parts on output side
+###### Firmware v1.3
+###### layout as Hw v1.44
+
 ![Testing with 0% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_OFF.png)
 
 ![Testing with 100% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_ON.png)
+
+### PCB prototype
+![PCB prototype 1](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_1.png)
+
+![PCB prototype 2](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Board_prototype/pcb_prototype_2.png)
+
+### First prototype dry test
+![First prototype dry test](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Prototype_dry_test.png)
+
 
 ### Memory and program storage utilization on ATmega328 (Arduino Nano v1.3):
 
@@ -66,8 +78,6 @@ Two instances after command has been received
 | :-----------------------------------------: | :--------------: | :-------------: |
 | With I2C display and using further channels | 4312 bytes (14%) | 212 bytes (10%) |
 | Without any optional feature                | 8876 bytes (28%) | 425 bytes (20%) |
-
-
 
 ![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
 
