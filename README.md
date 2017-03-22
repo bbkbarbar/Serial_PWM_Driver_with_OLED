@@ -95,9 +95,10 @@ Two instances after command has been received
  - [X] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
  - [X] Add termial connector for using optional 5V power supply for arduino (e.g. get VCC power directly from raspberry)
  - [X] Measure the power consumption before start using with direct 5V power supply (31mA)
- - [ ] Check appropirate layout (enaugh space for connect additional boards directly)
- - [ ] Create RTU PCB version
- - [ ] Build first usable prototype
+ - [X] Check appropirate layout (enaugh space for connect additional boards directly)
+ - [X] Create RTU PCB version
+ - [X] Build first usable prototype
+ - [ ] Testing with real output devices
 
 #### Created by:
 Andras Boor
