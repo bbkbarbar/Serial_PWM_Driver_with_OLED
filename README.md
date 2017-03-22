@@ -29,6 +29,7 @@
 This device can control individual PWM outputs as "channels".
 It get commands from any other device over serial communication. (e.g.: from a Raspberry Pi or a Bluetooth Serial module)
 It need to be able to control any DC device at least with 5A power consumption per channel.
+Need to elecrically separete output channels from MCU circuit and from connected serial device.
 
 
 ##### <a name="Device"> Used MCU: </a>
@@ -54,7 +55,7 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
 
 
 ###### <a name="further_channels"> Handling further channels: </a>
-    Can handle more channel than 6 (what is the physical limitation
+    Can handle more than 6 channels (what is the physical limitation
     by number of pwm channels on Arduino Nano board)
     If this feature is in use, then it forwards the received commands for a "slave instance"
     when the channel id (of the received command) is over the range of "own channels".
@@ -65,17 +66,18 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
 
 ### <a name="Required_input_line"> Required input line over serial communication: </a>
     Input line: channel_num value
-    Examples: 0 255
-              5 4095
 
-    | Input mode | Using "further channels" option | channel_num     | value   |
-    | ---------- | ------------------------------- | --------------- | ------- |
-    |    8 bit   |              No                 | (int) 0..5      | 0.. 255 |
-    |    8 bit   |              Yes                | (int) 0..ch_max | 0.. 255 |
-    |   12 bit   |              No                 | (int) 0..5      | 0..4095 |
-    |   12 bit   |              Yes                | (int) 0..ch_max | 0..4095 |
+    | Input mode | Using "further channels" option | channel_num | value   |
+    | ---------- | ------------------------------- | ----------- | ------- |
+    |    8 bit   |              No                 | 0..5        | 0.. 255 |
+    |    8 bit   |              Yes                | 0..ch_max   | 0.. 255 |
+    |   12 bit   |              No                 | 0..5        | 0..4095 |
+    |   12 bit   |              Yes                | 0..ch_max   | 0..4095 |
 
     ch_max: depens on the count of devices (= 6 * device count)
+
+    Examples: 0 255
+              5 4095
 
 ## <a name="testing_protoryping"> Testing, prototyping </a>
 
@@ -96,10 +98,10 @@ Send pwm commands from raspberryPi using the [attached python script](https://gi
 Two instances after command has been received
 ![Two instances after command has been received](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_-_v1.3_with_2_instances_2.png "Two instances after command has been received")
 
-##### <a name="Breadboard_testing_with_outputs"> Breadboard testing with all parts on output side </a>
-Firmware v1.3
 
-Used layout as Hw v1.44
+##### <a name="Breadboard_testing_with_outputs"> Breadboard testing with all parts on output side </a>
+    Firmware:          v1.3
+    Used layout as Hw: v1.44
 
 ![Testing with 0% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_OFF.png)
 
@@ -162,5 +164,5 @@ On MCU side:
  - [ ] Update PCB design with missing labels (hw version, serial output)
 
 #### Created by:
-Andras Boor
-2017.01.
+    Andras Boor
+    2017.01
