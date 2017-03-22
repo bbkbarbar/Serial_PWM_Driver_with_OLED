@@ -35,15 +35,15 @@ Arduino Nano v3
     For this function define macro: USE_12BIT_INPUT_VALUES
 
 ##### <a name="Required_input_line"> Required input line over serial communication: </a>
-    Input line: *channel_num value*
+    Input line: channel_num value
 
-    | Input mode | Using "further channels" option | channel_num       | value   |
-    | :--------: | :-----------------------------: | :---------------- | :-----: |
-    | 8 bit      | No                              | (int) 0..5        | 0..255  |
-    | 8 bit      | Yes                             | (int) 0..*ch_max* | 0..255  |
-    | 12 bit     | No                              | (int) 0..5        | 0..4095 |
-    | 12 bit     | Yes                             | (int) 0..*ch_max* | 0..4095 |
-    *ch_max*: depens on the count of devices (= 6 * device count)
+    | Input mode | Using "further channels" option | channel_num     | value   |
+    | :--------: | :-----------------------------: | :-------------- | :-----: |
+    | 8 bit      | No                              | (int) 0..5      | 0..255  |
+    | 8 bit      | Yes                             | (int) 0..ch_max | 0..255  |
+    | 12 bit     | No                              | (int) 0..5      | 0..4095 |
+    | 12 bit     | Yes                             | (int) 0..ch_max | 0..4095 |
+    ch_max: depens on the count of devices (= 6 * device count)
 
 ### <a name="Optional_feautres"> Optional feautres: </a>
 
