@@ -166,5 +166,3 @@ On MCU side:
 #### Created by:
     Andras Boor
     2017.01
-
-Test line only
