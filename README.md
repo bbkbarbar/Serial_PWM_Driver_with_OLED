@@ -9,7 +9,7 @@
   - [Number of output channels:](#output_channels)
   - [Required input line over serial communication:](#Required_input_line)
 - [Optional feautres:](#Optional_feautres)
-  - [Display can be used](#Display_can be_used)
+  - [Display can be used](#Display_can_be_used)
   - [Handling further channels:](#further_channels)
 - [Testing, prototyping](#testing_protoryping)
   - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
@@ -47,7 +47,7 @@ Arduino Nano v3
 
 ### <a name="Optional_feautres"> Optional feautres: </a>
 
-###### <a name="Display_can be_used"> Display can be used </a> (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
+###### <a name="Display_can_be_used"> Display can be used </a> (required library: [Arduino-SSD1306 Ascii](https://github.com/bbkbarbar/Arduino-SSD1306Ascii) ):
     Can handle simple oled display over I2C or SoftSPI protocols to show current values.
     For this feature define one of the following macros: USE_OLED_DISPLAY_I2C or USE_OLED_DISPLAY_SPI
 
