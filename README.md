@@ -113,6 +113,7 @@ On MCU side:
  - [X] Build first usable prototype
  - [ ] Testing with real output devices
  - [ ] Measure power consumption with real output devices
+ - [ ] Update PCB design with missing labels (hw version, serial output)
 
 #### Created by:
 Andras Boor
