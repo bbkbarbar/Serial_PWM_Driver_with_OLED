@@ -162,8 +162,9 @@ On MCU side:
  - [X] Check appropirate layout (enaugh space for connect additional boards directly)
  - [X] Create RTU PCB version
  - [X] Build first usable prototype
- - [ ] Testing with real output devices
- - [ ] Measure power consumption with real output devices
+ - [X] Testing with real output devices
+ - [X] Measure power consumption with real output devices
+ - [X] Implement requirement to update RGB channels together
  - [ ] Update PCB design with missing labels (hw version, serial output)
 
 #### Created by:
