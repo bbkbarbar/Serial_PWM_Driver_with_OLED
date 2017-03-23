@@ -84,11 +84,15 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
               5 4095
 
 <a name="testing_protoryping">
+
 ## Testing, prototyping
+
 </a>
 
 <a name="serial_communitation_with_pi">
+
 ##### Serial connection with a Raspberry Pi Zero
+
 </a>
 
     Serial PWM Driver board get commands over strandard serial communication.
@@ -118,6 +122,7 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
 [MCU side power consumtion can be found below](#power_consumption)
 
 Sample connection between Serial PWM Driver and RaspberryPi:
+
 ![Sample connection between Serial PWM Driver and RaspberryPi](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Connected_to_RaspberryPiZero.png "Sample connection between Serial PWM Driver and RaspberryPi")
 
 
