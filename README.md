@@ -136,8 +136,8 @@ Sample connection between Serial PWM Driver and RaspberryPi:
 
 
 ##### Testing v1.1 and v1.2 with display:
-v1.0 with I2C display
-![Testing @ v1.0 with I2C display](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_v1_0.png "v1.0 with I2C display")
+v1.1 with I2C display
+![Testing @ v1.0 with I2C display](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_v1_0.png "v1.1 with I2C display")
 v1.2 with I2C display and sample output RGB leds
 ![v1.2 with I2C display and sample output RGB leds](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Breadboard_Testing_v1.2.png "v1.2 with I2C display and sample output RGB leds")
 
