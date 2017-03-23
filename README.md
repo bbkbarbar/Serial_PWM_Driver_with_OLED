@@ -82,7 +82,38 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
     Examples: 0 255
               5 4095
 
-## <a name="testing_protoryping"> Testing, prototyping </a>
+<a name="testing_protoryping">
+## Testing, prototyping
+</a>
+
+##### Serial connection with a Raspberry Pi Zero
+
+    RaspberryPi using serial communication with signal level of 3,3V
+    In direction of Pi -> Arduino it works fine, because arduino can read Pi's
+    3,3V "high" signal as a "high" signal, since it is significantly higher
+    voltage than 2,5V, but:
+    In direction of Arduino -> Pi we have to apply a voltage divider to make
+    arduino's 5V signal level lower to protect the RaspberryPi.
+    For this we can use simple resistors with values of 220 and 470 Ohm,
+    to create a 3,3V  signal from Arduino's TX signal.
+
+    Note: According to the measured power consumtion of
+    Serial PWM Driver board on MCU side, it can be powered directly
+    from VCC of RaspberryPi.
+    If it needed because of any reason, Serial PWM Driver board can powered
+      - from external VCC (over it's VCC connector)
+      - from external raw input (6V-15V over RAW connector)
+    Important:
+      If Serial PWM Driver board is powered from any external source
+      (what is not the same as the power source of connected serial device),
+      then the VCC (5V) connection of "Serial In" MUST be interrupted
+      (via the jumper on the board).
+
+[MCU side power consumtion can be found below](#power_consumption)
+
+Sample connection between Serial PWM Driver and RaspberryPi:
+![Sample connection between Serial PWM Driver and RaspberryPi](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Connected_to_RaspberryPiZero.png "Sample connection between Serial PWM Driver and RaspberryPi")
+
 
 ##### Testing v1.0 and v1.2 with display:
 v1.0 with I2C display
