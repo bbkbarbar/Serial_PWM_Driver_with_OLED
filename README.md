@@ -28,12 +28,21 @@
 
 ## <a name="Requirements"> Requirements </a>
 
-This device can control individual PWM outputs as "channels".
-It get commands from any other device over serial communication. (e.g.: from a Raspberry Pi or a Bluetooth Serial module)
-It need to be able to control any DC device at least with 5A power consumption per channel.
-Need to elecrically separete output channels from MCU circuit and from connected serial device.
-Output channels 0, 1, 2 (planned to use for RGB) need to be updated in same time
-even if any of those channels has no new value (e.g. new commands contains only the red and green values)
+ - This device can control individual PWM outputs as "channels".
+
+ - It get commands from any other device over serial communication.
+
+ (e.g.: from a Raspberry Pi or a Bluetooth Serial module)
+
+ - It need to be able to control any DC device at least with 5A power consumption per channel.
+
+ - Need to elecrically separete output channels from MCU circuit and from connected serial device to protect own board and the attached device on the other side of serial communication
+ in case of any electrial issue.
+ (This will separation is that what will be named as "MCU-side" and "output-side" of this board.)
+ This separation based on optocouplers.
+
+ - More output channels need to be able to updated in same time
+even if any of those channels has no new value (e.g. When it drives RGB lights and new commands contains only the red and green values)
 
 
 ##### <a name="Device"> Used MCU: </a>
@@ -72,7 +81,7 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
 
 ### <a name="Required_input_line"> Required input line over serial communication </a>
 
-    Input line: channel_num value
+    Input line for any channel: channel_num value
 
     | Input mode | Using "further channels" option | channel_num | value   |
     | ---------- | ------------------------------- | ----------- | ------- |
@@ -95,14 +104,15 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
     In my case the other device (what sends the commands) will be a
     RaspberryPi Zero (link below).
 
-    RaspberryPi using serial communication with signal level of 3,3V
+    RaspberryPi (and many other devices) using serial communication
+    with signal level of 3,3V.
     In direction of Pi -> Arduino it works fine, because arduino can read Pi's
     3,3V "high" signal as a "high" signal, since it is significantly higher
-    voltage than 2,5V, but:
+    voltage than 2,5V (what is the middle of range 0V-5V), but:
     In direction of Arduino -> Pi we have to apply a voltage divider to make
     arduino's 5V signal level lower to protect the RaspberryPi.
     For this we can use simple resistors with values of 220 and 470 Ohm,
-    to create a 3,3V  signal from Arduino's TX signal.
+    to create a 3,3V signal from Arduino's TX signal.
 
     Note: According to the measured power consumtion of
     Serial PWM Driver board on MCU side, it can be powered directly
