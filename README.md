@@ -13,6 +13,7 @@
 - [Required input line over serial communication](#Required_input_line)
 - [Testing, prototyping](#testing_protoryping)
   - [Serial connection (with a Raspberry Pi Zero)](#serial_communitation_with_pi)
+  - [Breadboard testing](#Breadboard_testing)
   - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
 - [PCB design](#PCB_design)
   - [Part list](#part_list)
@@ -134,6 +135,7 @@ Sample connection between Serial PWM Driver and RaspberryPi:
 
 ![Sample connection between Serial PWM Driver and RaspberryPi](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Connected_to_RaspberryPiZero.png "Sample connection between Serial PWM Driver and RaspberryPi")
 
+##### <a name="Breadboard_testing"> Breadboard testing </a>
 
 ##### Testing v1.1 and v1.2 with display:
 v1.1 with I2C display
@@ -154,6 +156,7 @@ Two instances after command has been received
 
 
 ##### <a name="Breadboard_testing_with_outputs"> Breadboard testing with all parts on output side </a>
+
     Firmware:          v1.3
     Used layout as Hw: v1.44
 
