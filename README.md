@@ -135,7 +135,7 @@ Sample connection between Serial PWM Driver and RaspberryPi:
 ![Sample connection between Serial PWM Driver and RaspberryPi](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Connected_to_RaspberryPiZero.png "Sample connection between Serial PWM Driver and RaspberryPi")
 
 
-##### Testing v1.0 and v1.2 with display:
+##### Testing v1.1 and v1.2 with display:
 v1.0 with I2C display
 ![Testing @ v1.0 with I2C display](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/Testing_v1_0.png "v1.0 with I2C display")
 v1.2 with I2C display and sample output RGB leds
@@ -227,10 +227,11 @@ On MCU side:
     v1.3
       Add optional feautre for handling more channels with fowarding to an other instance
     v1.2
-      Add optional feautre for using I2C or SPI display
-    v1.1
       Add optional feautre for handling 8 and 12 bit wide input values
       (output works with 8 bit resolution in all case.)
+    v1.1
+      Add optional feautre for using I2C or SPI display
+
 
 #### Created by:
     Andras Boor
