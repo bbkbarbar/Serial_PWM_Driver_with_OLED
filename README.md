@@ -58,7 +58,8 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
         USE_OLED_DISPLAY_SPI
 
 
-###### <a name="further_channels"> Handling further channels: </a>
+###### <a name="further_channels"> Handling further channels </a>
+
     Can handle more than 6 channels (what is the physical limitation
     by number of pwm channels on Arduino Nano board)
     If this feature is in use, then it forwards the received commands for a "slave instance"
@@ -68,7 +69,9 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
 
         HANDLE_FURTHER_CHANNELS
 
-### <a name="Required_input_line"> Required input line over serial communication: </a>
+
+### <a name="Required_input_line"> Required input line over serial communication </a>
+
     Input line: channel_num value
 
     | Input mode | Using "further channels" option | channel_num | value   |
@@ -83,21 +86,15 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
     Examples: 0 255
               5 4095
 
-<a name="testing_protoryping">
+## <a name="testing_protoryping"> Testing, prototyping </a>
 
-## Testing, prototyping
 
-</a>
-
-<a name="serial_communitation_with_pi">
-
-##### Serial connection with a Raspberry Pi Zero
-
-</a>
+##### <a name="serial_communitation_with_pi"> Serial connection with a Raspberry Pi Zero </a>
 
     Serial PWM Driver board get commands over strandard serial communication.
     In my case the other device (what sends the commands) will be a
-    [RaspberryPi Zero](https://www.raspberrypi.org/blog/raspberry-pi-zero/)
+    RaspberryPi Zero (link below).
+
     RaspberryPi using serial communication with signal level of 3,3V
     In direction of Pi -> Arduino it works fine, because arduino can read Pi's
     3,3V "high" signal as a "high" signal, since it is significantly higher
@@ -120,6 +117,8 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
       (via the jumper on the board).
 
 [MCU side power consumtion can be found below](#power_consumption)
+
+[RaspberryPi Zero](https://www.raspberrypi.org/blog/raspberry-pi-zero/)
 
 Sample connection between Serial PWM Driver and RaspberryPi:
 
