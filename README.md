@@ -21,6 +21,7 @@
   - [Power consumption](#power_consumption)
   - [Memory and program storage utilization on ATmega328](#memory_useage)
 - [ToDo list](#todo)
+- [Changelog](#changelog)
 
 
 
@@ -109,7 +110,7 @@ Two instances after command has been received
 
 ![Testing with 100% output](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Control_12V_LED_strip_Powered_from_PI_5V_ON.png)
 
-## <a name="PCB_design"> PCB design </a>
+### <a name="PCB_design"> PCB design </a>
 ![PCB design v1.45](https://raw.githubusercontent.com/bbkbarbar/Serial_PWM_Driver_with_OLED/master/Documents/PCB_design_1.45.png)
 
 ##### Eagle schamatic available as zip & pdf:
@@ -153,7 +154,7 @@ On MCU side:
 
 
 
-### <a name="todo"> ToDo: </a>
+### <a name="todo"> ToDo </a>
  - [x] Modify pinout config of softSpi display according to the pin order on display's pcb.
  - [x] Modify PCB design: Leave enaugh space between arduino and optional I2C display (when display connected directly on the board).
  - [X] Modify PCB design: Add pin-header to SoftSPI connection of optional display (it should be 2-sided (rotateable) if it's possible)
@@ -166,6 +167,19 @@ On MCU side:
  - [X] Measure power consumption with real output devices
  - [X] Implement requirement to update RGB channels together
  - [ ] Update PCB design with missing labels (hw version, serial output)
+
+
+### <a name="changelog"> Changelog </a>
+    v1.4
+      Output channels can be linked together, to be able to update
+      RGB channels together in same time
+    v1.3
+      Add optional feautre for handling more channels with fowarding to an other instance
+    v1.2
+      Add optional feautre for using I2C or SPI display
+    v1.1
+      Add optional feautre for handling 8 and 12 bit wide input values
+      (output works with 8 bit resolution in all case.)
 
 #### Created by:
     Andras Boor
