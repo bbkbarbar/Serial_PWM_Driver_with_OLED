@@ -12,6 +12,7 @@
   - [Handling further channels](#further_channels)
 - [Required input line over serial communication](#Required_input_line)
 - [Testing, prototyping](#testing_protoryping)
+  - [Serial connection (with a Raspberry Pi Zero)](#serial_communitation_with_pi)
   - [Breadboard testing with all parts on output side](#Breadboard_testing_with_outputs)
 - [PCB design](#PCB_design)
   - [Part list](#part_list)
@@ -86,8 +87,13 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
 ## Testing, prototyping
 </a>
 
+<a name="serial_communitation_with_pi">
 ##### Serial connection with a Raspberry Pi Zero
+</a>
 
+    Serial PWM Driver board get commands over strandard serial communication.
+    In my case the other device (what sends the commands) will be a
+    [RaspberryPi Zero](https://www.raspberrypi.org/blog/raspberry-pi-zero/)
     RaspberryPi using serial communication with signal level of 3,3V
     In direction of Pi -> Arduino it works fine, because arduino can read Pi's
     3,3V "high" signal as a "high" signal, since it is significantly higher
