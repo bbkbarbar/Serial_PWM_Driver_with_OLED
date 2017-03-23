@@ -6,9 +6,9 @@ import datetime
 import serial
 
 # Constants
-outout_channel_of_red   = 1     # 1
-outout_channel_of_green = 2 	# 0
-outout_channel_of_blue  = 0
+output_channel_of_red   = 1     # 1
+output_channel_of_green = 2 	# 0
+output_channel_of_blue  = 0
 
 def write_to_file(data):
 	homePath = os.environ["HOME"]
@@ -35,9 +35,9 @@ def sendOutputCommandOnSerial(command):
 
 # Parse arguments
 parser = argparse.ArgumentParser('RGB test')
-parser.add_argument("-r","--red", type=int, help="red", default = 0)
-parser.add_argument("-g","--green", type=int, help="green", default = 0)
-parser.add_argument("-b","--blue", type=int, help="blue", default = 0)
+parser.add_argument("-r","--red", type=int, help="red", default = -1)
+parser.add_argument("-g","--green", type=int, help="green", default = -1)
+parser.add_argument("-b","--blue", type=int, help="blue", default = -1)
 
 parser.add_argument("-x", "--hex", type=str, help="RGB color in hex string", default = "  ")
 parser.add_argument("-c", "--complete", type=str, help="all color component in one", default = "  ")
@@ -84,9 +84,10 @@ else:
 
 
 # Set PWM outputs
-sendOutputCommandOnSerial(str(outout_channel_of_green) + " " + str(green));
-sendOutputCommandOnSerial(str(outout_channel_of_red)   + " " + str(red));
-sendOutputCommandOnSerial(str(outout_channel_of_blue)  + " " + str(blue));
+if((red >= 0) or (green >=0) or (blue >=0)):
+	sendOutputCommandOnSerial(str(output_channel_of_blue)  + " " + str(blue));
+	sendOutputCommandOnSerial(str(output_channel_of_red)   + " " + str(red));
+	sendOutputCommandOnSerial(str(output_channel_of_green) + " " + str(green));
 
 if ch3_val >= 0:
 	sendOutputCommandOnSerial("3 " + str(ch3_val));
