@@ -1,6 +1,6 @@
 /*
  * Serial PWM driver
- * version 1.3
+ * version 1.4
  * 
  * Device: 
  *     Arduino Nano
@@ -41,7 +41,7 @@
  * Created by: Andras Boor
  * 2017.01.
  */
-#define VERSION  "v1.3"
+#define VERSION  "v1.4"
 
 
 /*
@@ -142,6 +142,7 @@
 #define DISPLAY_STEP                25  // 1/10 * PWM_MAX
 #define QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION         16
 #define HALF_OF_QUOTIENT_BETWEEN_8_AND_12_BIT_RESOLUTION  8
+#define UPDATE_CHANNEL_INDEPENDENTLY -1
 
 const char pwmChannelMap[PWM_CHANNEL_COUNT] = {
   PWM_OUTPUT_CH0,
@@ -157,6 +158,30 @@ unsigned char outputs[PWM_CHANNEL_COUNT];     // Array for storing values of pwm
 String inputBuffer = "";                      // Variable for storing received data
 
 
+/*
+ *  Outputs can be linked to an other channel.
+ *  It means the linked new value of a linked channel will be setted on output
+ *  only when the other channel (where it is linked) gets a new value.
+ *  -1 means that channel is not linked anywhere.
+ */
+char outputBindings[PWM_CHANNEL_COUNT] = {
+	UPDATE_CHANNEL_INDEPENDENTLY,
+	UPDATE_CHANNEL_INDEPENDENTLY,
+	UPDATE_CHANNEL_INDEPENDENTLY,
+	UPDATE_CHANNEL_INDEPENDENTLY,
+	UPDATE_CHANNEL_INDEPENDENTLY,
+	UPDATE_CHANNEL_INDEPENDENTLY
+};
+
+void linkChannel(unsigned char what, unsigned char where){
+	if( (what >= PWM_CHANNEL_COUNT) || (where >= PWM_CHANNEL_COUNT) || (what == where)){
+		// We can link only the "own" channels together.
+		// And we can NOT link a channel for himself.
+		return;
+	}
+	outputBindings[what] = where;
+}
+
 //=================================================================================
 
 void setup() {
@@ -169,6 +194,11 @@ void setup() {
   pinMode(PWM_OUTPUT_CH4, OUTPUT);   
   pinMode(PWM_OUTPUT_CH5, OUTPUT);   
   
+  // Set RGB channels together
+  // Set output of ch0 and ch1 only when ch3 is updated.
+  linkChannel(1, 0);
+  linkChannel(2, 0);
+
 
   #ifdef USE_OLED_DISPLAY_I2C
     oled.begin(&Adafruit128x64, I2C_ADDRESS_OF_DISPLAY, true);
@@ -201,18 +231,28 @@ void setup() {
     //oled.println("Serial\nPWM Driver\n" + String(VERSION));
     oled.println("Serial\nPWM Driver");
     oled.set1X();
-    oled.println(String(VERSION));
+    oled.println(String(VERSION) + "\n");
 
     #ifdef USE_12BIT_INPUT_VALUES
-      oled.println("\nInput mode: 12 bit");
+      oled.println("Input mode: 12 bit");
     #else
-      oled.println("\nInput mode: 8 bit");
+      oled.println("Input mode: 8 bit");
     #endif
     #ifdef HANDLE_FURTHER_CHANNELS  
-      oled.println("\nSerial out enabled");
+      oled.println("Serial out enabled");
     #endif
-      //TODO: show on welcome screen if HANDLE_FURTHER_CHANNELS is "turned on"
-    //oled.println("Listen serial port..");
+     
+    /*
+    int i=0;
+    String bindings = "B:";
+    for(i=0; i<PWM_CHANNEL_COUNT; i++){
+    	if(outputBindings[i] != UPDATE_CHANNEL_INDEPENDENTLY){
+	        bindings += (" " + String(i) + "->" + String(outputBindings[i]) + ",");
+        }
+    }
+    oled.println(bindings);
+
+    /**/
   #endif
 
 }
@@ -331,8 +371,29 @@ void processLine(String line){
   
     if(channel < PWM_CHANNEL_COUNT){
       outputs[channel] = value;
-      // Set own pwm output of according to processed channel number and value..
-      analogWrite(pwmChannelMap[channel], value);
+
+      if(outputBindings[channel] == UPDATE_CHANNEL_INDEPENDENTLY){
+      
+        // Set own pwm output of according to processed channel number and value..
+        int i=0;
+        for(; i<PWM_CHANNEL_COUNT; i++){
+        	if(outputBindings[i] == channel){
+        		// channel[i] has been binded to currently updated channel
+        		analogWrite(pwmChannelMap[i], outputs[i]);
+        	}
+        }
+        analogWrite(pwmChannelMap[channel], value);
+
+        #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
+          showOutputs();
+        #endif
+      
+      }else{
+      	// Output channel has been binded to an other..
+
+      	// Wanted output value is stored in outputs[] so..
+      	// Do nothing now..
+      }
     }
     #ifdef HANDLE_FURTHER_CHANNELS
       else{ 
@@ -343,9 +404,6 @@ void processLine(String line){
 
   }
 
-  #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
-    showOutputs();
-  #endif
 }
 
 

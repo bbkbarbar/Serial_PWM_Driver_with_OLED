@@ -1,6 +1,6 @@
 # Serial PWM Driver with optional OLED display
 
-##### Firmware version: 1.31
+##### Firmware version: 1.4
 ##### Hardware version: 1.45
 
 #### Table of content:
@@ -30,6 +30,8 @@ This device can control individual PWM outputs as "channels".
 It get commands from any other device over serial communication. (e.g.: from a Raspberry Pi or a Bluetooth Serial module)
 It need to be able to control any DC device at least with 5A power consumption per channel.
 Need to elecrically separete output channels from MCU circuit and from connected serial device.
+Output channels 0, 1, 2 (planned to use for RGB) need to be updated in same time
+even if any of those channels has no new value (e.g. new commands contains only the red and green values)
 
 
 ##### <a name="Device"> Used MCU: </a>
@@ -135,18 +137,19 @@ Two instances after command has been received
 ##### <a name="power_consumption"> Power consumption </a>
 On MCU side:
 
-| Condition                   | Consumption on VCC    |
-| :-------------------------: | :-------------------: |
-| 0% output on all channels   | 31,0 mA               |
-| 100% output on 1 channel    | 34,4 mA               |
-| 100% output on all channels | 51,4 mA (calculated)  |
+| Condition                   | Consumption on VCC   |
+| :-------------------------: | :------------------: |
+| 0% output on all channels   | 25,6 mA              |
+| 100% output on 1 channel    | 29,0 mA              |
+| 100% output on 3 channels   | 36,2 mA              |
+| 100% output on all channels | 46,8 mA (calculated) |
 
 ##### <a name="memory_useage">  Memory and program storage utilization on ATmega328 </a> (Arduino Nano v1.3):
 
-| Option(s) used                              | Program storage  | Dynamic memory  |
-| :-----------------------------------------: | :--------------: | :-------------: |
-| With I2C display and using further channels | 4312 bytes (14%) | 212 bytes (10%) |
-| Without any optional feature                | 8876 bytes (28%) | 425 bytes (20%) |
+| Option(s) used                              | Program storage  | Dynamic memory  | Sw version |
+| :-----------------------------------------: | :--------------: | :-------------: | :--------: |
+| With I2C display and using further channels | 9018 bytes (29%) | 429 bytes (20%) | v1.4       |
+| Without any optional feature                | 8876 bytes (28%) | 425 bytes (20%) | v1.2       |
 
 
 
