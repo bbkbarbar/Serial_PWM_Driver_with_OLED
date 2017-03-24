@@ -1,3 +1,5 @@
+Python based serial output does not works with following error message:
+
 pi@dev-pi:~ $ sudo python /home/pi/python/live/pwm_serial_6ch.py -r 100 -g 600
 Traceback (most recent call last):
   File "/home/pi/python/live/pwm_serial_6ch.py", line 6, in <module>
@@ -8,5 +10,13 @@ Traceback (most recent call last):
     class Serial(PosixSerial, io.RawIOBase):
 AttributeError: 'module' object has no attribute 'RawIOBase'
 
-
 https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=76028
+
+
+Source of problem:
+  In directory "/home/pi/python/live/" there were an other file with name "io.py"
+  This had been used as an "overwrite" of the default io.py lib.
+
+Solution:
+  Rename that "io.py" file.
+	http://stackoverflow.com/questions/23572003/why-io-module-object-has-no-attribute-rawiobase-eventhough-i-am-using-python-2
