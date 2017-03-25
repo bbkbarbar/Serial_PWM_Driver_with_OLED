@@ -196,8 +196,8 @@ void setup() {
   
   // Set RGB channels together
   // Set output of ch0 and ch1 only when ch3 is updated.
-  linkChannel(1, 0);
-  linkChannel(2, 0);
+  linkChannel(0, 2);
+  linkChannel(1, 2);
 
 
   #ifdef USE_OLED_DISPLAY_I2C
