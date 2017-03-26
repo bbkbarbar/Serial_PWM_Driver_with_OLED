@@ -1,6 +1,6 @@
 /*
  * Serial PWM driver
- * version 1.4
+ * version 1.5
  * 
  * Device: 
  *     Arduino Nano
@@ -41,7 +41,7 @@
  * Created by: Andras Boor
  * 2017.01.
  */
-#define VERSION  "v1.4"
+#define VERSION  "v1.5"
 
 
 /*
@@ -52,6 +52,8 @@
 #define USE_12BIT_INPUT_VALUES
 
 #define HANDLE_FURTHER_CHANNELS
+
+#include <EEPROM.h>
 
 
 //===============================================================================================
@@ -219,11 +221,17 @@ void setup() {
     delay(100);
   #endif
 
-
+  unsigned char wasValueStored = 0;
   for(char i=0; i<PWM_CHANNEL_COUNT; i++){
-    outputs[i] = DEFAULT_OUTPUT_VALUE;
+    //outputs[i] = DEFAULT_OUTPUT_VALUE;
+    unsigned char value = EEPROM.read(i);
+    EEPROM.write(i, 0);
+    outputs[i] = value;
+    if(value != 0){
+      wasValueStored = 1;
+    }
+    analogWrite(pwmChannelMap[i], outputs[i]);
   }
-
 
   #if defined(USE_OLED_DISPLAY_I2C) || defined(USE_OLED_DISPLAY_SPI)
     // Show start message on display
@@ -253,6 +261,11 @@ void setup() {
     oled.println(bindings);
 
     /**/
+
+  if(wasValueStored){
+    showOutputs();
+  }
+
   #endif
 
 }
@@ -371,6 +384,10 @@ void processLine(String line){
   
     if(channel < PWM_CHANNEL_COUNT){
       outputs[channel] = value;
+
+      // Store current values
+      EEPROM.write(channel, value); 
+      //if(EEPROM.read(ADDR_COLOR_IS_STORED) == COLOR_IS_STORED){}
 
       if(outputBindings[channel] == UPDATE_CHANNEL_INDEPENDENTLY){
       
