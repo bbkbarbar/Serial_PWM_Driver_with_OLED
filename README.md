@@ -1,6 +1,6 @@
 # Serial PWM Driver with optional OLED display
 
-##### Firmware version: 1.4
+##### Firmware version: 1.5
 ##### Hardware version: 1.45
 
 #### Table of content:
@@ -224,6 +224,10 @@ On MCU side:
 
 
 ### <a name="changelog"> Changelog </a>
+    v1.5
+      Store output values for recover after restart device.
+      After restoring values, it will save 0 value for all channels.
+      Thereby all output channel can be set for 0 with restart twice.
     v1.4
       Output channels can be linked together, to be able to update
       RGB channels together in same time
