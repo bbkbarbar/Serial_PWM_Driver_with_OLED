@@ -67,6 +67,10 @@ Arduino Nano v3 [(eBay link)](http://www.ebay.com/itm/191773759569?_trksid=p2057
         USE_OLED_DISPLAY_I2C or
         USE_OLED_DISPLAY_SPI
 
+    Important note:
+        Do not define any "USE_OLED_DISPLAY..." macro (comment it out) if display is not connected.
+        It will stop working when it tries to communicate with the display and there is no display.
+
 
 ###### <a name="further_channels"> Handling further channels </a>
 
