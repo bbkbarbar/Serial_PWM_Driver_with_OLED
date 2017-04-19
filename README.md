@@ -190,6 +190,8 @@ Two instances after command has been received
 
 ![First prototype dry test](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Prototype_dry_test.png)
 
+Final placing
+![Final placing](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Final_placing/boxed.png)
 
 ### <a name="Measurements"> Measurements </a>
 
