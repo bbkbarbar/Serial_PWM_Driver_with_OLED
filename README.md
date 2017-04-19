@@ -19,6 +19,7 @@
   - [Part list](#part_list)
   - [PCB prototype](#PCB_prototype)
   - [First prototype dry test](#prototype_dry_test)
+  - [Final placing](#final_placing)
 - [Measurements](#Measurements)
   - [Power consumption](#power_consumption)
   - [Memory and program storage utilization on ATmega328](#memory_useage)
@@ -190,7 +191,8 @@ Two instances after command has been received
 
 ![First prototype dry test](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Overall_testing/Prototype_dry_test.png)
 
-Final placing
+##### <a name="final_placing"> Final placing </a>
+
 ![Final placing](https://github.com/bbkbarbar/Serial_PWM_Driver_with_OLED/raw/master/Documents/Final_placing/boxed.png)
 
 ### <a name="Measurements"> Measurements </a>
