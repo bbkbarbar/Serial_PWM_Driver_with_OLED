@@ -47,7 +47,7 @@
 /*
  *  Macro definitions for optional features
  */
-#define USE_OLED_DISPLAY_I2C
+//#define USE_OLED_DISPLAY_I2C
 
 #define USE_12BIT_INPUT_VALUES
 
